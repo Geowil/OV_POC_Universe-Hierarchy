@@ -1,0 +1,188 @@
+rowid,ID,Setting_Key,Setting_Value,Description,Setting_Area
+1,1,Weapon_Shd_Dmg_Multi_Easy,2,"Difficulty: Easy
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 2.0 (Default)",Damage
+2,2,Weapon_Arm_Dmg_Multi_Easy,1.5,"Difficulty: Easy
+Setting: Outgoing Armor Damage (damage to enemy armor)
+Modifier: 1.5 (Default)",Damage
+3,3,Out_Hull_Dmg_Easy,1.25,"Difficulty: Easy
+Setting: Outgoing Hull Damage (damage to enemy hull)
+Modifier: 1.25 (Default)",Damage
+4,4,Out_Shd_Dmg_Moderate,1,"Difficulty: Moderate
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 1 (Default)",Damage
+5,5,Out_Arm_Dmg_Moderate,1,"Difficulty: Moderate
+Setting: Outgoing Armor Damage (damage to enemy armor)
+Modifier: 1 (Default)
+",Damage
+6,6,Out_Hull_Dmg_Moderate,1,"Difficulty: Moderate
+Setting: Outgoing Hull Damage (damage to enemy hull)
+Modifier: 1 (Default)
+",Damage
+7,7,Out_Shd_Dmg_Hard,0.75,"Difficulty: Hard
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 0.75 (Default)
+",Damage
+8,8,Out_Arm_Dmg_Hard,0.75,"Difficulty: Hard
+Setting: Outgoing Armor Damage (damage to enemy armor)
+Modifier: 0.75 (Default)
+",Damage
+9,9,Out_Hull_Dmg_Hard,0.75,"Difficulty: Hard
+Setting: Outgoing Hull Damage (damage to enemy hull)
+Modifier: 0.75 (Default)
+
+",Damage
+10,10,Out_Shd_Dmg_Extreme,0.5,"Difficulty: Extreme
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 0.50 (Default)
+
+",
+11,11,Out_Arm_Dmg_Extreme,0.5,"Difficulty: Extreme
+Setting: Outgoing Armor Damage (damage to enemy armor)
+Modifier: 0.50 (Default)",
+12,12,Out_Hull_Dmg_Extreme,0.5,"Difficulty: Extreme
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 0.50 (Default)",
+13,13,Out_Shd_Dmg_Realistic,0.75,"Difficulty: Realistic
+Setting: Outgoing Shield Damage (damage to enemy shields)
+Modifier: 0.75 (Default)
+",
+14,14,Out_Arm_Dmg_Realistic,1.25,"Difficulty: Realistic
+Setting: Outgoing Armor Damage (damage to enemy Armor)
+Modifier: 1.25 (Default)
+",
+15,15,Out_Hull_Dmg_Realistic,2,"Difficulty: Realistic
+Setting: Outgoing Hull Damage (damage to enemy hull)
+Modifier: 2 (Default)
+",
+16,16,In_Shd_Dmg_Realistic,0.75,"Difficulty: Realistic
+Setting: Incoming Shield Damage (damage to player shields)
+Modifier: 0.75 (Default)
+
+",
+17,17,In_Arm_Dmg_Realistic,1.25,"Difficulty: Realistic
+Setting: Incoming Armor Damage (damage to player armor)
+Modifier: 1.25 (Default)
+",
+18,18,In_Hull_Dmg_Realistic,2,"Difficulty: Realistic
+Setting: Incoming Hull Damage (damage to player hull)
+Modifier: 2 (Default)
+",
+19,19,Difficulties,"Easy,Moderate,Hard,Extreme,Realistic","This setting defines the difficulty types for the game.  If you add a new difficulty please be sure to add settings for it.
+
+If you change the name of one please be sure to alter ALL other difficulty related settings for that setting as the name listed here is used to determine the settings to use for that difficulty.
+
+Please use underscores in place of spaces.",Game
+20,20,Ship_Class_Types,"Frigate,Destroyer,Cruiser,Battle_Cruiser,Battleship,Commandship,Mothership,Titan,Mining_Barge",This setting defines the ship types for several statistics within the game.  Please add your new types to the end of the list.  Some other settings may require changes if you modify a name or add a new class.  Please check the wiki for more details.,Ship
+21,21,Scrap_Yield_Easy,2.5,"Difficulty: Easy
+Setting: Scrap Yield
+Modifer: 2.5 (Default)
+Description:
+	This setting allows you to modify the amount of scrap a player will receive from a
+	wrecked ship.  Salvaged Amount of Resource * Modifer.
+Example:
+	Salvaged 20 Draconic, setting modifer makes this 50 Draconic.",Game
+22,22,Scrap_Yield_Moderate,1.5,"Difficulty: Moderate
+Setting: Scrap Yield
+Modifer: 1.5 (Default)
+Description:
+	This setting allows you to modify the amount of scrap a player will receive from a
+	wrecked ship.  Salvaged Amount of Resource * Modifer.
+Example:
+	Salvaged 20 Draconic, setting modifer makes this 30 Draconic.",Game
+23,23,Scrap_Yield_Hard,1,"Difficulty: Hard
+Setting: Scrap Yield
+Modifer: 1 (Default)
+Description:
+	This setting allows you to modify the amount of scrap a player will receive from a
+	wrecked ship.  Salvaged Amount of Resource * Modifer.
+Example:
+	Salvaged 20 Draconic, setting modifer makes this 20 Draconic.",Game
+24,24,Scrap_Yield_Extreme,0.75,"Difficulty: Extreme
+Setting: Scrap Yield
+Modifer: 0.75 (Default)
+Description:
+	This setting allows you to modify the amount of scrap a player will receive from a
+	wrecked ship.  Salvaged Amount of Resource * Modifer.
+Example:
+	Salvaged 20 Draconic, setting modifer makes this 15 Draconic.",Game
+25,25,Scrap_Yield_Realistic,0.5,"Difficulty: Realistic
+Setting: Scrap Yield
+Modifer: 0.5 (Default)
+Description:
+	This setting allows you to modify the amount of scrap a player will receive from a
+	wrecked ship.  Salvaged Amount of Resource * Modifer.
+Example:
+	Salvaged 20 Draconic, setting modifer makes this 10 Draconic.",Game
+26,26,Missile_Class_Types,"Ultralite,Lite,Lite_Standard,Lite_Advanced,Standard,Standard_Heavy,Medium,Heavy,Ultra_Heavy,Titan",This setting defines the missile class types to be used in the game.  Please add your new types to the end of this list.  Some other settings may require changes if you modify or add a new class.  Please check the wiki for more details.,Weapon
+27,27,HSec_Hostile_SRate_Easy,0.25,"Difficulty: Easy
+Setting: High Sec Hostile Spawn Rate
+Modifier: 0.25 (Default)
+Description:
+	This setting allows you to modify the number of spawned hostile ships in high sec space.
+
+Example:
+	This setting at 0.50 will spawn half as many hostile ships in high sec space.",Game
+28,28,HSec_Hostile_SRate_Moderate,1,"Difficulty: Moderate
+Setting: High Sec Hostile Spawn Rate
+Modifier: 1.0 (Default)
+Description:
+	This setting allows you to modify the number of spawned hostile ships in high sec space.
+
+Example:
+	This setting at 0.50 will spawn half as many hostile ships in high sec space.",Game
+29,29,HSec_Hostile_SRate_Hard,1.5,"Difficulty: Hard
+Setting: High Sec Hostile Spawn Rate
+Modifier: 1.5 (Default)
+Description:
+	This setting allows you to modify the number of spawned hostile ships in high sec space.
+
+Example:
+	This setting at 0.50 will spawn half as many hostile ships in high sec space.",Game
+30,30,HSec_Hostile_SRate_Extreme,1.75,"Difficulty: Extreme
+Setting: High Sec Hostile Spawn Rate
+Modifier: 1.75 (Default)
+Description:
+	This setting allows you to modify the number of spawned hostile ships in high sec space.
+
+Example:
+	This setting at 0.50 will spawn half as many hostile ships in high sec space.",Game
+31,31,HSec_Hostile_SRate_Realistic,2,"Difficulty: Realistic
+Setting: High Sec Hostile Spawn Rate
+Modifier: 2.0 (Default)
+Description:
+	This setting allows you to modify the number of spawned hostile ships in high sec space.
+
+Example:
+	This setting at 0.50 will spawn half as many hostile ships in high sec space.",Game
+32,32,MSec_Hostile_SRate_Easy,0.45,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Mid_Sec_Hostile_Spawn_Rates,Game
+33,33,MSec_Hostile_SRate_Moderate,1.2,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Mid_Sec_Hostile_Spawn_Rates,Game
+34,34,MSec_Hostile_SRate_Hard,1.8,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Mid_Sec_Hostile_Spawn_Rates,Game
+35,35,MSec_Hostile_SRate_Extreme,2,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Mid_Sec_Hostile_Spawn_Rates,Game
+36,36,MSec_Hostile_SRate_Realistic,2.25,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Mid_Sec_Hostile_Spawn_Rates,Game
+37,37,LSec_Hostile_SRate_Easy,0.5,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Low_Sec_Hostile_Spawn_Rates,Game
+38,38,LSec_Hostile_SRate_Moderate,1.8,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Low_Sec_Hostile_Spawn_Rates,Game
+39,39,LSec_Hostile_SRate_Hard,2,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Low_Sec_Hostile_Spawn_Rates,Game
+40,40,LSec_Hostile_SRate_Extreme,2.25,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Low_Sec_Hostile_Spawn_Rates,Game
+41,41,LSec_Hostile_SRate_Realistic,2.5,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Low_Sec_Hostile_Spawn_Rates,Game
+42,42,NSec_Hostile_SRate_Easy,0.68,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Null_Sec_Hostile_Spawn_Rates,Game
+43,43,NSec_Hostile_SRate_Moderate,1.95,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Null_Sec_Hostile_Spawn_Rates,Game
+44,44,NSec_Hostile_SRate_Hard,2.35,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Null_Sec_Hostile_Spawn_Rates,Game
+45,45,NSec_Hostile_SRate_Extreme,2.8,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Null_Sec_Hostile_Spawn_Rates,Game
+46,46,NSec_Hostile_SRate_Realistic,3,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#Null_Sec_Hostile_Spawn_Rates,Game
+47,47,CXP_P_BaseVal_Easy,95,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Base_Value,Game
+48,48,CXP_P_BaseVal_Moderate,98,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Base_Value,Game
+49,49,CXP_P_BaseVal_Hard,102,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Base_Value,Game
+50,50,CXP_P_BaseVal_Extreme,108,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Base_Value,Game
+51,51,CXP_P_BaseVal_Realistic,115,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Base_Value,Game
+52,52,CXP_P_Factor_Easy,2.1,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Factor_Value,Game
+53,53,CXP_P_Factor_Moderate,2.12,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Factor_Value,Game
+54,54,CXP_P_Factor_Hard,2.14,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Factor_Value,Game
+55,55,CXP_P_Factor_Extreme,2.17,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Factor_Value,Game
+56,56,CXP_P_Factor_Realistic,2.22,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Player_Factor_Value,Game
+57,57,CXP_E_FacVal_Easy,2.1,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Enemy_Factor_Value,Game
+58,58,CXP_E_FacVal_Moderate,2,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Enemy_Factor_Value,Game
+59,59,CXP_E_FacVal_Hard,1.95,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Enemy_Factor_Value,Game
+60,60,CXP_E_FacVal_Extreme,1.92,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Enemy_Factor_Value,Game
+61,61,CXP_E_FacVal_Realistic,1.87,http://www.lmpgames.com/w2/index.php?title=Setting_Descriptions#CXP_Enemy_Factor_Value,Game
+62,62,Logging_Level,1,,Logging

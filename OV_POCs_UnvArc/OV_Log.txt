@@ -1,0 +1,54 @@
+Odyssian Void Logging File V1.1
+Please report any Warn or Err log entries at http://bugs.lmpgames.com/tbg/index.php
+Please include entire line of log entry along with the above logging file version
+
+
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:14  [Err]: Err001 - Query on Ships failed: unknown error at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 234.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 14 2017 21:00:41  [Err]: Err001 - Query on Ships failed: unknown error at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 234.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err002 - Null string queried from Ships at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 498.
+Sep 15 2017 13:48:08  [Err]: Err001 - Query on Ships failed: unknown error at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 234.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 476.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 480.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 488.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 472.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 476.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 480.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 488.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 480.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
+Sep 22 2017 16:39:49  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 488.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 472.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 476.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 480.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 488.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
+Sep 22 2017 16:39:50  [Err]: Err002 - Null string queried from Equipment at File: c:\users\geowil\documents\visual studio 2017\projects\ov_pocs\ov_pocs_unvarc\datasystem.cpp  Line: 484.
