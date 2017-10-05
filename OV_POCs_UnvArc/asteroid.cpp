@@ -34,7 +34,7 @@ string Asteroid::getName(int pos) {
 }
 
 string Asteroid::getDesc() {
-	return aDesc;
+	return aDescj;
 }
 
 string Asteroid::getOName() {
