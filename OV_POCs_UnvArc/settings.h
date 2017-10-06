@@ -19,14 +19,17 @@ namespace Settings {
 	class diffSettings;
 	class pltTypeSettings;
 	class roidStageSettings;
+	class oreTierSettings;
 
 	extern void loadSettings();
 	extern void loadDiffSettings();
 	extern void loadPltSettings();
 	extern void loadRoidOSettings();
+	extern void loadOreTypeSettings();
 
 	extern pltTypeSettings processPltSettings(pltTypeSettings plts, string key, string val);
 	extern roidStageSettings processRoidSettings(roidStageSettings roid, string key, string val);
+	extern oreTierSettings processOreTierSettings(oreTierSettings tier, string key, string val);
 
 	extern void setDiffSettings();
 	extern void setLogLevel(string val);
@@ -58,14 +61,20 @@ namespace Settings {
 	extern void setMxABelts(string val);
 	extern void setABeltMxRoids(bool bIsMax, string val);
 	extern void setABeltSzRnd(bool bIsMax, string val);
+	extern void setRdSzRandRng(bool bIsMax, string val);
 	extern void setRdSmRng(bool bIsMax, string val);
 	extern void setRdMdRng(bool bIsMax, string val);
 	extern void setRdLgRng(bool bIsMax, string val);
 	extern void setUnvExpRate(string val);
+	extern void setHighSecRng(bool bIsMax, string val);
+	extern void setMidSecRng(bool bIsMax, string val);
+	extern void setLowSecRng(bool bIsMax, string val);
+	extern void setNullSecRng(bool bIsMax, string val);
 
 	extern void getDifficulties(string val);
 	extern void getPltTyps(string val);
 	extern void getOreStages(string val);
+	extern void getOreTiers(string val);
 	
 	extern void setSMap(map<string, string> settingMap);
 	extern vector<string> splitVal(string val);
@@ -102,6 +111,7 @@ namespace Settings {
 	extern vector<string> missClsTypes; //Missile Class Types
 	extern vector<string> pltTypes; //Types of Planets (classes, 0-5 by default)
 	extern vector<string> oreStages; //Types of ore stages
+	extern vector<string> oreTiers; //Types of ore tiers
 	extern string sGameDifficulty; //Selected game difficulty
 
 	//Range Settings
@@ -114,14 +124,21 @@ namespace Settings {
 	extern Range pltEksRand; //Sets the range used in determining the eks/size of a planet
 	extern Range abltMaxAsteroids; //Sets the min and max number of asteroids per belt
 	extern Range abltSizeRandRng; //Sets the min and max random range for asteroid belt size
+	extern Range roidSizeRandRng; //Sets the min and max range for asteroid size calculation
 	extern Range roidSmallRng; //Random vals which correspond to a small asteroid
 	extern Range roidMedRng; //Random vals which correspond to a medium asteroid
 	extern Range roidLargeRng; //Random vals which correspond to a large asteroid
+	extern Range secRtHighRng; //High security rating range
+	extern Range secRtMidRng; //Mid security rating range
+	extern Range secRtLowRng; //Low security rating range
+	extern Range secRtNullRng; //Null security rating range
+
 
 	//Reference Settings
 	extern vector<diffSettings> gDiffSettings; //Stores all of the data related to setting difficulty-specific values
 	extern vector<pltTypeSettings> gPltTypSettings; //Stores all of the data related to specific planet type settings
 	extern vector<roidStageSettings> gRoidStgSettings; //Stores all of the data related to specific ore/asteroid stages
+	extern vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
 
 	//Misc - used to process setting data
 	extern map<string, string> rawSettings, rawSettingsTemp;
@@ -210,7 +227,7 @@ public:
 	roidStageSettings(string stage);
 
 	string getStage();
-
+	int getStageI();
 	void setRoidOStgMulRnd(bool bIsMax, float val);
 	void setRoidStgMulti(float val);
 
@@ -219,10 +236,37 @@ public:
 
 private:
 	string roidStage;
+	int roidStageI;
 
 	Range roidOStgMulRnd;
 	float roidStgMulti;
 
+};
+
+class Settings::oreTierSettings {
+public:
+	oreTierSettings(string tier);
+
+	void setHighRng(bool bIsMax, float val);
+	void setMidRng(bool bIsMax, float val);
+	void setLowRng(bool bIsMax, float val);
+	void setNullRng(bool bIsMax, float val);
+
+	string getTier();
+	int getTierVal();
+	Range getHighRng();
+	Range getMidRng();
+	Range getLowRng();
+	Range getNullRng();
+
+private:
+	string tierName;
+	int tierVal;
+
+	Range tierHighRng;
+	Range tierMidRng;
+	Range tierLowRng;
+	Range tierNullRng;
 };
 
 

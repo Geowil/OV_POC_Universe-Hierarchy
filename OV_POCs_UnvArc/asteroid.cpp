@@ -33,12 +33,12 @@ string Asteroid::getName(int pos) {
 	return aOre.at(pos).getName();
 }
 
-string Asteroid::getDesc() {
-	return aDesc;
+string Asteroid::getDesc(int pos) {
+	return aOre.at(pos).getDesc();
 }
 
-string Asteroid::getOName() {
-	return aOName;
+string Asteroid::getOName(int pos) {
+	return aOre.at(pos).getOre;
 }
 
 float  Asteroid::getSize() {
@@ -49,8 +49,8 @@ float  Asteroid::getOAmount() {
 	return aOAmount;
 }
 
-int Asteroid::getOID() {
-	return aOID;
+int Asteroid::getOID(int pos) {
+	return aOre.at(pos).getID();
 }
 
 int Asteroid::getAID() {

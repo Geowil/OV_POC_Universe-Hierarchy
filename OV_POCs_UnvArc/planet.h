@@ -16,7 +16,7 @@ class Planet : public Object{
 public:
 	Planet();  //constructor
 	Planet(string name); //constructor 2
-	Planet(string name, float eks, long long int pop); //constructor 3
+	Planet(string name, float eks, long long int pop, float slvl); //constructor 3
 
 	Planet createPlanet() { return Planet(); }
 
@@ -72,6 +72,9 @@ public:
 	vector<Shield> getShields();
 	Shield getShield(int index);
 
+	void setSLevel(float slvl);
+	float getSLevel();
+
 	
 							
 private:
@@ -86,6 +89,8 @@ private:
 	bool bIsPOwned; //bool: is this planet owned by the player?
 	bool bIsDest; //bool: is this planet destroyed (has it been attacked and laid barren)?
 	string pStatus; //Planet status, for battle processing
+
+	float plSecLvl; //Store this value from system for asteroid creation
 
 	string name;
 	int ramount;

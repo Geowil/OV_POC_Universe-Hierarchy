@@ -39,13 +39,14 @@ Planet::Planet(string name) {
 	bIsDest = false;
 }
 
-Planet::Planet(string name, float eks, long long int pop) {
+Planet::Planet(string name, float eks, long long int pop, float slvl) {
 	
 	plName = name;
 	pEKS = eks;
 	pMPop = pop;
 	pPop = pMPop;
 	bIsDest = false;
+	plSecLvl = slvl;
 }
 
 Planet* Planet::getPlanet() {
@@ -201,7 +202,7 @@ void Planet::addBelt(string name, float size, int ramount, bool full) {
 	if (!full) {
 		belts.push_back(aBelt(name, size, ramount, false));
 
-		belts.at(belts.size() - 1).createAsteroids();
+		belts.at(belts.size() - 1).createAsteroids(plSecLvl);
 
 		//Sleep(300);
 	} else {
@@ -350,3 +351,6 @@ vector<Shield> Planet::getShields() {
 Shield Planet::getShield(int index) {
 	return pShd.at(index);
 }
+
+void Planet::setSLevel(float slvl) { plSecLvl = slvl; }
+float Planet::getSLevel() { return plSecLvl; }

@@ -16,6 +16,7 @@ namespace Settings {
 		getPltTyps(rawSettings.at("Planet_Types"));
 		setMxPlts(rawSettings.at("Max_Planets"));
 		getOreStages(rawSettings.at("Ore_Stages"));
+		getOreTiers(rawSettings.at("Ore_Tiers"));
 		setPltPopRand1Rng(false, rawSettings.at("Planet_Pop_Rand1_Min"));
 		setPltPopRand1Rng(true, rawSettings.at("Planet_Pop_Rand1_Max"));
 		setPltPopRand2Rng(false, rawSettings.at("Planet_Pop_Rand2_Min"));
@@ -36,6 +37,8 @@ namespace Settings {
 		setABeltMxRoids(true, rawSettings.at("Max_Asteroids"));
 		setABeltSzRnd(false, rawSettings.at("ABelt_Size_Rand_Min"));
 		setABeltSzRnd(true, rawSettings.at("ABelt_Size_Rand_Max"));
+		setRdSzRandRng(false, rawSettings.at("Asteroid_Size_Rand_Min"));
+		setRdSzRandRng(true, rawSettings.at("Asteroid_Size_Rand_Max"));
 		setRdSmRng(false, rawSettings.at("Asteroid_Small_Range_Min"));
 		setRdSmRng(true, rawSettings.at("Asteroid_Small_Range_Max"));
 		setRdMdRng(false, rawSettings.at("Asteroid_Medium_Range_Min"));
@@ -43,6 +46,14 @@ namespace Settings {
 		setRdLgRng(false, rawSettings.at("Asteroid_Large_Range_Min"));
 		setRdLgRng(true, rawSettings.at("Asteroid_Large_Range_Max"));
 		setUnvExpRate(rawSettings.at("Unv_Exp_Rate"));
+		setHighSecRng(false, rawSettings.at("Sec_Rate_High_Min"));
+		setHighSecRng(true, rawSettings.at("Sec_Rate_High_Max"));
+		setMidSecRng(false, rawSettings.at("Sec_Rate_Mid_Min"));
+		setMidSecRng(true, rawSettings.at("Sec_Rate_Mid_Max"));
+		setLowSecRng(false, rawSettings.at("Sec_Rate_Low_Min"));
+		setLowSecRng(true, rawSettings.at("Sec_Rate_Low_Max"));
+		setNullSecRng(false, rawSettings.at("Sec_Rate_Null_Min"));
+		setNullSecRng(true, rawSettings.at("Sec_Rate_Null_Max"));
 		//}
 		//catch (const std::exception& e) {
 
@@ -134,6 +145,26 @@ namespace Settings {
 		}
 	}
 
+	void loadOreTypeSettings() {
+		//Prepare oreTierSettings if not ready
+		if (gOreTierSettings.size() < 1) {
+			for (string tier : oreTiers) {
+				gOreTierSettings.push_back(oreTierSettings(tier));
+			}
+		}
+
+		//Now get the settings for each tier
+		for (oreTierSettings& tierSetting : gOreTierSettings) {
+			for (auto mapEl : rawSettings) {
+				string tmpStr = mapEl.first;
+
+				if (tmpStr.find(tierSetting.getTier()) != string::npos) {
+					tierSetting = processOreTierSettings(tierSetting, mapEl.first, mapEl.second);
+				}
+			}
+		}
+	}
+
 	//Process a single plt type's settings which are now stored in keys and vals vectors
 	pltTypeSettings processPltSettings(pltTypeSettings plts, string key, string val) {
 		if (key.find("EKS_Range_Min") != string::npos) { plts.setPltEksRng(false, stof(val)); }
@@ -157,11 +188,25 @@ namespace Settings {
 		return roid;
 	}
 
+	oreTierSettings processOreTierSettings(oreTierSettings tier, string key, string val) {
+		if (key.find("High_Sec_Min") != string::npos) { tier.setHighRng(false, stof(val)); }
+		else if (key.find("High_Sec_Max") != string::npos) { tier.setHighRng(true, stof(val)); }
+		else if (key.find("Mid_Sec_Min") != string::npos) { tier.setMidRng(false, stof(val)); }
+		else if (key.find("Mid_Sec_Max") != string::npos) { tier.setMidRng(true, stof(val)); }
+		else if (key.find("Low_Sec_Min") != string::npos) { tier.setLowRng(false, stof(val)); }
+		else if (key.find("Low_Sec_Max") != string::npos) { tier.setLowRng(true, stof(val)); }
+		else if (key.find("Null_Sec_Min") != string::npos) { tier.setNullRng(false, stof(val)); }
+		else if (key.find("Null_Sec_Max") != string::npos) { tier.setNullRng(true, stof(val)); }
+
+		return tier;
+	}
+
 	void setLogLevel(string val) { logLvl = stoi(val); }
 	void setPlyCXPBVal(string val) { plyCXPBVal = stoi(val); }
 	void getPltTyps(string val) { pltTypes = splitVal(val); }
 	void getDifficulties(string val) { gameDiffs = splitVal(val); }
 	void getOreStages(string val) { oreStages = splitVal(val); }
+	void getOreTiers(string val) { oreTiers = splitVal(val); }
 	void setDifficulty(string val) { sGameDifficulty = val; }
 	void setPlyShdDmgMlt(string val) { shdDmgMultPly = stof(val); }
 	void setPlyArmDmgMlt(string val) { armDmgMultPly = stof(val); }
@@ -226,6 +271,11 @@ namespace Settings {
 		else { abltSizeRandRng.fLow = stof(val); }
 	}
 
+	extern void setRdSzRandRng(bool bIsMax, string val) {
+		if (bIsMax) { roidSizeRandRng.fHigh = stof(val); }
+		else { roidSizeRandRng.fLow = stof(val); }
+	}
+
 	extern void setRdSmRng(bool bIsMax, string val) {
 		if (bIsMax) { roidSmallRng.fHigh = stof(val); }
 		else { roidSmallRng.fLow = stof(val); }
@@ -239,6 +289,26 @@ namespace Settings {
 	extern void setRdLgRng(bool bIsMax, string val) {
 		if (bIsMax) { roidLargeRng.fHigh = stof(val); }
 		else { roidLargeRng.fLow = stof(val); }
+	}
+
+	void setHighSecRng(bool bIsMax, string val) {
+		if (bIsMax) { secRtHighRng.fHigh = stof(val); }
+		else { secRtHighRng.fLow = stof(val); }
+	}
+
+	void setMidSecRng(bool bIsMax, string val) {
+		if (bIsMax) { secRtMidRng.fHigh = stof(val); }
+		else { secRtMidRng.fLow = stof(val); }
+	}
+
+	void setLowSecRng(bool bIsMax, string val) {
+		if (bIsMax) { secRtLowRng.fHigh = stof(val); }
+		else { secRtLowRng.fLow = stof(val); }
+	}
+
+	void setNullSecRng(bool bIsMax, string val) {
+		if (bIsMax) { secRtNullRng.fHigh = stof(val); }
+		else { secRtNullRng.fLow = stof(val); }
 	}
 	
 	void setSMap(map<string, string> settingMap) {
@@ -366,24 +436,60 @@ namespace Settings {
 
 
 	//roidStageSettings Functions
-	roidStageSettings::roidStageSettings(string stage) { roidStage = "Stage" + stage; }
+	roidStageSettings::roidStageSettings(string stage) {
+		roidStage = "Stage" + stage; 
+		roidStageI = stoi(stage);
+	}
 	void roidStageSettings::setRoidOStgMulRnd(bool bIsMax, float val) {
 		if (bIsMax) { roidOStgMulRnd.fHigh = val; }
 		else { roidOStgMulRnd.fLow = val; }
 	}
 
 	string roidStageSettings::getStage() { return roidStage; }
+	int roidStageSettings::getStageI() { return roidStageI; }
 	void roidStageSettings::setRoidStgMulti(float val) { roidStgMulti = val; }
 	Range roidStageSettings::getRoidOStgMulRnd() { return roidOStgMulRnd; }
 	float roidStageSettings::getRoidStgMulti() { return roidStgMulti; }
 
 
+	//oreTierSettings Functions
+	oreTierSettings::oreTierSettings(string tier) {
+		tierName = "Tier" + tier;
+		tierVal = stoi(tier);
+	}
+
+	void oreTierSettings::setHighRng(bool bIsMax, float val) {
+		if (bIsMax) { tierHighRng.fHigh = val; }
+		else { tierHighRng.fLow = val; }
+	}
+
+	void oreTierSettings::setMidRng(bool bIsMax, float val) {
+		if (bIsMax) { tierMidRng.fHigh = val; }
+		else { tierMidRng.fLow = val; }
+	}
+
+	void oreTierSettings::setLowRng(bool bIsMax, float val) {
+		if (bIsMax) { tierLowRng.fHigh = val; }
+		else { tierLowRng.fLow = val; }
+	}
+
+	void oreTierSettings::setNullRng(bool bIsMax, float val) {
+		if (bIsMax) { tierNullRng.fHigh = val; }
+		else { tierNullRng.fLow = val; }
+	}
+
+	string oreTierSettings::getTier() { return tierName; }
+	int oreTierSettings::getTierVal() { return tierVal; }
+	Range oreTierSettings::getHighRng() { return tierHighRng; }
+	Range oreTierSettings::getMidRng() { return tierMidRng; }
+	Range oreTierSettings::getLowRng() { return tierLowRng; }
+	Range oreTierSettings::getNullRng() { return tierNullRng; }
+
 
 	//new functions
-	
 
 	//New members
-		
+	
 
 
 	//Namespace Members
@@ -416,6 +522,7 @@ namespace Settings {
 	string sGameDifficulty; //Selected game difficulty
 	vector<string> pltTypes; //Types of Planets (classes, 0-5 by default)
 	vector<string> oreStages; //Types of ore stages
+	vector<string> oreTiers; //Types of ore tiers
 	
 	//Range Settings
 	Range pltPopRand1; //Range used to calculate planet population
@@ -427,15 +534,20 @@ namespace Settings {
 	Range pltEksRand; //Sets the range used in determining the eks/size of a planet
 	Range abltMaxAsteroids; //Sets the min and max number of asteroids per belt
 	Range abltSizeRandRng; //Sets the min and max random range for asteroid belt size
+	Range roidSizeRandRng; //Sets the min and max range for asteroid size calculation
 	Range roidSmallRng; //Random vals which correspond to a small asteroid
 	Range roidMedRng; //Random vals which correspond to a medium asteroid
 	Range roidLargeRng; //Random vals which correspond to a large asteroid
+	Range secRtHighRng; //High security rating range
+	Range secRtMidRng; //Mid security rating range
+	Range secRtLowRng; //Low security rating range
+	Range secRtNullRng; //Null security rating range
 
 	//Reference Settings
 	vector<diffSettings> gDiffSettings;
 	vector<pltTypeSettings> gPltTypSettings;
 	vector<roidStageSettings> gRoidStgSettings; //Stores all of the data related to specific ore/asteroid stages
-	
+	extern vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
 							
 	//Misc
 	map<string, string> rawSettings, rawSettingsTemp;

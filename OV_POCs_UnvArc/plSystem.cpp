@@ -130,6 +130,7 @@ void planetarySystem::generatePlanets() {
 		plt.setSize(pSRand2); //Set planet size
 		plt.updatePop(pPMax2, "set"); //Set planet population
 		plt.updateMPop(pPMax2, "set"); //Set planet max population
+		plt.setSLevel(plsSec); //Pass the system sec rating to planet for use later
 
 		numODef = u::getDefenses(u::getIRand(setting::pltDefRand.fLow, setting::pltDefRand.fHigh), pERand2);
 		numOShd = u::getShields(u::getIRand(setting::pltShdRand.fLow, setting::pltShdRand.fHigh), pERand2);

@@ -6,43 +6,58 @@ namespace u = Util;
 dataSystem::dataSystem() {}
 
 //These are interface functions to allow external classes to call private functions for building queries.
-void dataSystem::prepQuery(string table, string stmtOperation, int id) {
+void dataSystem::prepQuery(string table, string stmtOperation, int id, vector<string> whereConds) {
 	sqlTable = table;
 	
-	buildStmt(table, stmtOperation, id);
+	buildStmt(table, stmtOperation, id, whereConds);
 	queryData(table);
 }
 
-void dataSystem::prepQueryRng(string table, string stmtOperation, Range ids) {
+void dataSystem::prepQueryRng(string table, string stmtOperation, Range ids, vector<string> whereConds) {
 	sqlTable = table;
 
-	buildStmt(table, stmtOperation, ids);
+	buildStmt(table, stmtOperation, ids, whereConds);
 	queryData(table);
 }
 
-void dataSystem::prepQueryVec(string table, string stmtOperation, vector<int> ids) {
+void dataSystem::prepQueryVec(string table, string stmtOperation, vector<int> ids, vector<string> whereConds) {
 	sqlTable = table;
 	
-	buildStmt(table, stmtOperation, ids);
+	buildStmt(table, stmtOperation, ids, whereConds);
 	queryData(table);
 }
 
 //Query buidlers; in future will need to expand these out or create a new override which can use other fields which can be specified from in game for sorting or something similar, more specific searches (such as based on max resource cost or ship type reqs)
-void dataSystem::buildStmt(string table, string operation, int id) {
+void dataSystem::buildStmt(string table, string operation, int id, vector<string> whereConds) {
 	string sID = to_string(id);
 
-	if ((operation == "select from") && (id > 0)) {
+	if (operation == "select from" && id > 0) {
 		sqlStr = "Select * From " + table + " Where ID = " + sID;
 		rows = 1;
-	} else if ((operation == "select from") && (id == 0)) {
+	} else if (operation == "select from" && id == 0) {
 		sqlStr = "Select * From " + table;
 		rows = -1; //-1 is an ad-hoc flag to pull the count of the table later on
+	} else if (operation == "select from where" && id == 0 && whereConds.size() > 0) {
+		//Type = 'Ore', Stage = '1'
+		whereCondStr = "Where ";
+
+		for (i1 = 0; i1 < whereConds.size(); i1++) {
+			if (i1 == whereConds.size() - 1) {
+				whereCondStr += whereConds.at(i1);
+			} else {
+				whereCondStr += whereConds.at(i1) + " and ";
+			}
+		}
+
+		sqlStr = "Select * From " + table + whereCondStr;
+
+		rows = -1;
 	}
 
 	sqlStmt = sqlStr.c_str();
 }
 
-void dataSystem::buildStmt(string table, string operation, Range ids) {	
+void dataSystem::buildStmt(string table, string operation, Range ids, vector<string> whereConds) {
 	string lID = to_string(ids.iLow);
 	string hID = to_string(ids.iHigh);
 
@@ -55,22 +70,22 @@ void dataSystem::buildStmt(string table, string operation, Range ids) {
 	sqlStmt = sqlStr.c_str();
 }
 
-void dataSystem::buildStmt(string table, string operation, vector<int> ids) {
-	whereConds = " Where ID IN (";
+void dataSystem::buildStmt(string table, string operation, vector<int> ids, vector<string> whereConds) {
+	whereCondStr = " Where ID IN (";
 
 	//Build where condition list
 	for (i1 = 0; i1 < ids.size(); i1++) {
 		string sID = to_string(ids.at(i1));
 		
 		if (i1 == ids.size() - 1) {
-			whereConds += sID + ')';
+			whereCondStr += sID + ")";
 		} else {
-			whereConds += sID + ",";
+			whereCondStr += sID + ",";
 		}
 	}
 
 	if (operation == "select from") {
-		sqlStr = "Select * From " + table + whereConds;
+		sqlStr = "Select * From " + table + whereCondStr;
 
 		rows = ids.size(); //Same as for build from range, filtering will cause some issues with the logic as is
 	}
@@ -100,6 +115,7 @@ void dataSystem::queryData(string table) {
 	else if (table == "Races") { rtnRaces(); }
 	else if (table == "Ram") { rtnRam(); }
 	else if (table == "Ranks") { rtnRanks(); }
+	else if (table == "Reprocessing") { rtnReproc(); }
 	else if (table == "Resources") { rtnRescs(); }
 	else if (table == "Settings") { rtnSet(); }
 	else if (table == "ShipClasses") { rtnShpClasses(); }
@@ -602,6 +618,31 @@ void dataSystem::rtnRanks(){
 
 				if (!bNoCols) { 
 					sRank = getRankData(stmt, sRank);
+				}
+			}
+		}
+	}
+
+	finalize(stmt, __LINE__);
+}
+
+void dataSystem::rtnReproc(){
+	clearVec("rsltRpc");
+	stmt = prepStmt(sqlTable, __LINE__);
+
+	if (!bStmtErr) {
+		for (i1 = 0; i1 < rows; i1++) {
+			rsltRpc.push_back(strcReproc());
+		}
+
+		for (strcReproc &sRpc : rsltRpc) {
+			procStep(sqlTable, __LINE__);
+
+			if (!bStepErr) {
+				cols = getRtnCols(sqlTable, __LINE__);
+
+				if (!bNoCols) {
+					sRpc = getReprocData(stmt, sRpc);
 				}
 			}
 		}
@@ -2206,6 +2247,46 @@ strcRank dataSystem::getRankData(sqlite3_stmt * stm, strcRank rnkData){
 	return rnkData;
 }
 
+strcReproc dataSystem::getReprocData(sqlite3_stmt * stm, strcReproc rpcData){
+	for (i1 = 0; i1 <= cols; i1++) {
+		switch (i1) {
+		case 0:
+			rpcData.id = sqlite3_column_int(stm, i1);
+			break;
+
+		case 1:
+			rpcData.oid = sqlite3_column_int(stm, i1);
+			break;
+
+		case 2:
+			rpcData.rid = sqlite3_column_int(stm, i1);
+			break;
+
+		case 3:
+			rpcData.repunits= (float)sqlite3_column_double(stm, i1);
+			break;
+
+		case 4:
+			rpcData.resprod = (float)sqlite3_column_double(stm, i1);
+			break;
+
+		case 5:
+			rpcData.rescost = sqlite3_column_int(stm, i1);
+			break;
+
+		case 6: 
+			rpcData.resprodloss = (float)sqlite3_column_double(stm, i1);
+			break;
+
+		default:
+			u::createBInfo("Warn", __FILE__, to_string(__LINE__), __DATE__, __TIME__, "Warn002", "Unexpected case value " + to_string(i1), "./OV_Log.txt");
+			break;
+		}
+	}
+
+	return rpcData;
+}
+
 strcResc dataSystem::getRescData(sqlite3_stmt * stm, strcResc rscData){
 	for (i1 = 0; i1 <= cols; i1++) { 
 		switch (i1) { 
@@ -2233,12 +2314,11 @@ strcResc dataSystem::getRescData(sqlite3_stmt * stm, strcResc rscData){
 			rscData.stg = sqlite3_column_int(stm, i1);
 			break;
 
-		case 6:
-			rscData.bsize = (float)sqlite3_column_double(stm, i1);
+		case 6: rscData.tier = sqlite3_column_int(stm, i1);
 			break;
 
 		case 7:
-			rscData.resource = getStrCol(stm, i1, __LINE__);
+			rscData.bsize = (float)sqlite3_column_double(stm, i1);
 			break;
 
 		case 8:
@@ -2246,22 +2326,6 @@ strcResc dataSystem::getRescData(sqlite3_stmt * stm, strcResc rscData){
 			break;
 
 		case 9:
-			rscData.runits = sqlite3_column_int(stm, i1);
-			break;
-
-		case 10:
-			rscData.resprd = sqlite3_column_int(stm, i1);
-			break;
-
-		case 11:
-			rscData.rcost = sqlite3_column_int(stm, i1);
-			break;
-
-		case 12:
-			rscData.rploss = (float)sqlite3_column_double(stm, i1);
-			break;
-
-		case 13:
 			rscData.xcost = sqlite3_column_int(stm, i1);
 			break;
 		
@@ -3092,7 +3156,15 @@ vector<strcRace> dataSystem::getRaces() { return rsltRaces; }
 strcRam dataSystem::getRam() { return rsltRam.at(0); }
 vector<strcRam> dataSystem::getRams() { return rsltRam; }
 strcRank dataSystem::getRank() { return rsltRanks.at(0); }
+strcReproc dataSystem::getReproc()
+{
+	return strcReproc();
+}
 vector<strcRank> dataSystem::getRanks() { return rsltRanks; }
+vector<strcReproc> dataSystem::getReprocs()
+{
+	return vector<strcReproc>();
+}
 strcResc dataSystem::getResc() { return rsltRescs.at(0); }
 vector<strcResc> dataSystem::getRescs() { return rsltRescs; }
 strcShpCls dataSystem::getShpCls() { return rsltShpClss.at(0); }

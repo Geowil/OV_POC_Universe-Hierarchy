@@ -134,12 +134,17 @@ struct strcRank {
 	string name; //1
 };
 
+struct strcReproc {
+	int id, oid, rid, rescost; //0-2,5
+	float repunits, resprod, resprodloss; //3-4,6
+};
+
 //Requirement xref
 
 struct strcResc {
-	string name, desc, typ, resource, ore; //1-2,4,7-8
-	int id, stg, runits, resprd, rcost, xcost; //0,5,9-11,13
-	float sg2, bsize, rploss; //3,6,12
+	string name, desc, typ, ore; //1-2,4,8
+	int id, stg, tier, xcost; //0,5,6,9
+	float sg2, bsize; //3,7
 };
 
 struct strcSetting {
