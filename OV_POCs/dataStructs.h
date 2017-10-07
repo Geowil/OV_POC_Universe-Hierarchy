@@ -142,8 +142,8 @@ struct strcReproc {
 //Requirement xref
 
 struct strcResc {
-	string name, desc, typ, ore; //1-2,4,8
-	int id, stg, tier, xcost; //0,5,6,9
+	string name, desc, typ; //1-2,4,
+	int id, stg, tier, xcost; //0,5,6,8
 	float sg2, bsize; //3,7
 };
 

@@ -2322,10 +2322,6 @@ strcResc dataSystem::getRescData(sqlite3_stmt * stm, strcResc rscData){
 			break;
 
 		case 8:
-			rscData.ore = getStrCol(stm, i1, __LINE__);
-			break;
-
-		case 9:
 			rscData.xcost = sqlite3_column_int(stm, i1);
 			break;
 		

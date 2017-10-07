@@ -9,55 +9,55 @@ namespace Settings {
 		This function is used to load any non-difficulty related setting values
 	*/
 	void loadSettings() {
-		//try {
-		setLogLevel(rawSettings.at("Logging_Level"));
-		getDifficulties(rawSettings.at("Difficulties"));
-		setMisTypes(rawSettings.at("Missile_Class_Types"));
-		getPltTyps(rawSettings.at("Planet_Types"));
-		setMxPlts(rawSettings.at("Max_Planets"));
-		getOreStages(rawSettings.at("Ore_Stages"));
-		getOreTiers(rawSettings.at("Ore_Tiers"));
-		setPltPopRand1Rng(false, rawSettings.at("Planet_Pop_Rand1_Min"));
-		setPltPopRand1Rng(true, rawSettings.at("Planet_Pop_Rand1_Max"));
-		setPltPopRand2Rng(false, rawSettings.at("Planet_Pop_Rand2_Min"));
-		setPltPopRand2Rng(true, rawSettings.at("Planet_Pop_Rand2_Max"));
-		setPltPopRand3Rng(false, rawSettings.at("Planet_Pop_Rand3_Min"));
-		setPltPopRand3Rng(true, rawSettings.at("Planet_Pop_Rand3_Max"));
-		setPltDefRandRng(false, rawSettings.at("Planet_Def_Rand_Min"));
-		setPltDefRandRng(true, rawSettings.at("Planet_Def_Rand_Max"));
-		setPltShdRandRng(false, rawSettings.at("Planet_Shd_Rand_Min"));
-		setPltShdRandRng(true, rawSettings.at("Planet_Shd_Rand_Max"));
-		setPltSzRandRng(false, rawSettings.at("Planet_Size_Range_Min"));
-		setPltSzRandRng(true, rawSettings.at("Planet_Size_Range_Max"));
-		setPltEksRandRng(false, rawSettings.at("Planet_EKS_Range_Min"));
-		setPltEksRandRng(true, rawSettings.at("Planet_EKS_Range_Max"));
-		setUnvStrtSysAmt(rawSettings.at("Unv_Starting_Systems"));
-		setMxABelts(rawSettings.at("Max_Asteroid_Belts"));
-		setABeltMxRoids(false, rawSettings.at("Min_Asteroids"));
-		setABeltMxRoids(true, rawSettings.at("Max_Asteroids"));
-		setABeltSzRnd(false, rawSettings.at("ABelt_Size_Rand_Min"));
-		setABeltSzRnd(true, rawSettings.at("ABelt_Size_Rand_Max"));
-		setRdSzRandRng(false, rawSettings.at("Asteroid_Size_Rand_Min"));
-		setRdSzRandRng(true, rawSettings.at("Asteroid_Size_Rand_Max"));
-		setRdSmRng(false, rawSettings.at("Asteroid_Small_Range_Min"));
-		setRdSmRng(true, rawSettings.at("Asteroid_Small_Range_Max"));
-		setRdMdRng(false, rawSettings.at("Asteroid_Medium_Range_Min"));
-		setRdMdRng(true, rawSettings.at("Asteroid_Medium_Range_Max"));
-		setRdLgRng(false, rawSettings.at("Asteroid_Large_Range_Min"));
-		setRdLgRng(true, rawSettings.at("Asteroid_Large_Range_Max"));
-		setUnvExpRate(rawSettings.at("Unv_Exp_Rate"));
-		setHighSecRng(false, rawSettings.at("Sec_Rate_High_Min"));
-		setHighSecRng(true, rawSettings.at("Sec_Rate_High_Max"));
-		setMidSecRng(false, rawSettings.at("Sec_Rate_Mid_Min"));
-		setMidSecRng(true, rawSettings.at("Sec_Rate_Mid_Max"));
-		setLowSecRng(false, rawSettings.at("Sec_Rate_Low_Min"));
-		setLowSecRng(true, rawSettings.at("Sec_Rate_Low_Max"));
-		setNullSecRng(false, rawSettings.at("Sec_Rate_Null_Min"));
-		setNullSecRng(true, rawSettings.at("Sec_Rate_Null_Max"));
-		//}
-		//catch (const std::exception& e) {
-
-		//}
+		try {
+			setLogLevel(rawSettings.at("Logging_Level"));
+			getDifficulties(rawSettings.at("Difficulties"));
+			setMisTypes(rawSettings.at("Missile_Class_Types"));
+			getPltTyps(rawSettings.at("Planet_Types"));
+			setMxPlts(rawSettings.at("Max_Planets"));
+			getOreStages(rawSettings.at("Ore_Stages"));
+			getOreTiers(rawSettings.at("Ore_Tiers"));
+			setPltPopRand1Rng(false, rawSettings.at("Planet_Pop_Rand1_Min"));
+			setPltPopRand1Rng(true, rawSettings.at("Planet_Pop_Rand1_Max"));
+			setPltPopRand2Rng(false, rawSettings.at("Planet_Pop_Rand2_Min"));
+			setPltPopRand2Rng(true, rawSettings.at("Planet_Pop_Rand2_Max"));
+			setPltPopRand3Rng(false, rawSettings.at("Planet_Pop_Rand3_Min"));
+			setPltPopRand3Rng(true, rawSettings.at("Planet_Pop_Rand3_Max"));
+			setPltDefRandRng(false, rawSettings.at("Planet_Def_Rand_Min"));
+			setPltDefRandRng(true, rawSettings.at("Planet_Def_Rand_Max"));
+			setPltShdRandRng(false, rawSettings.at("Planet_Shd_Rand_Min"));
+			setPltShdRandRng(true, rawSettings.at("Planet_Shd_Rand_Max"));
+			setPltSzRandRng(false, rawSettings.at("Planet_Size_Rand_Min"));
+			setPltSzRandRng(true, rawSettings.at("Planet_Size_Rand_Max"));
+			setPltEksRandRng(false, rawSettings.at("Planet_EKS_Range_Min"));
+			setPltEksRandRng(true, rawSettings.at("Planet_EKS_Range_Max"));
+			setUnvStrtSysAmt(rawSettings.at("Unv_Starting_Systems"));
+			setMxABelts(rawSettings.at("Max_Asteroid_Belts"));
+			setABeltMxRoids(false, rawSettings.at("Min_Asteroids"));
+			setABeltMxRoids(true, rawSettings.at("Max_Asteroids"));
+			setABeltSzRnd(false, rawSettings.at("ABelt_Size_Rand_Min"));
+			setABeltSzRnd(true, rawSettings.at("ABelt_Size_Rand_Max"));
+			setRdSzRandRng(false, rawSettings.at("Asteroid_Size_Rand_Min"));
+			setRdSzRandRng(true, rawSettings.at("Asteroid_Size_Rand_Max"));
+			setRdSmRng(false, rawSettings.at("Asteroid_Small_Range_Min"));
+			setRdSmRng(true, rawSettings.at("Asteroid_Small_Range_Max"));
+			setRdMdRng(false, rawSettings.at("Asteroid_Medium_Range_Min"));
+			setRdMdRng(true, rawSettings.at("Asteroid_Medium_Range_Max"));
+			setRdLgRng(false, rawSettings.at("Asteroid_Large_Range_Min"));
+			setRdLgRng(true, rawSettings.at("Asteroid_Large_Range_Max"));
+			setUnvExpRate(rawSettings.at("Unv_Exp_Rate"));
+			setHighSecRng(false, rawSettings.at("Sec_Rating_High_Min"));
+			setHighSecRng(true, rawSettings.at("Sec_Rating_High_Max"));
+			setMidSecRng(false, rawSettings.at("Sec_Rating_Mid_Min"));
+			setMidSecRng(true, rawSettings.at("Sec_Rating_Mid_Max"));
+			setLowSecRng(false, rawSettings.at("Sec_Rating_Low_Min"));
+			setLowSecRng(true, rawSettings.at("Sec_Rating_Low_Max"));
+			setNullSecRng(false, rawSettings.at("Sec_Rating_Null_Min"));
+			setNullSecRng(true, rawSettings.at("Sec_Rating_Null_Max"));
+		}
+		catch (std::out_of_range& const e) {
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	/*
@@ -184,6 +184,12 @@ namespace Settings {
 		if (key.find("Multi_Rand_Min") != string::npos) { roid.setRoidOStgMulRnd(false, stof(val)); }
 		else if (key.find("Multi_Rand_Max") != string::npos) { roid.setRoidOStgMulRnd(true, stof(val)); }
 		else if (key.find("Size_Multi") != string::npos) { roid.setRoidStgMulti(stoi(val)); }
+		else if (key.find("Small_Min") != string::npos) { roid.setRoidSmRng(false, stoi(val)); }
+		else if (key.find("Small_Max") != string::npos) { roid.setRoidSmRng(true, stoi(val)); }
+		else if (key.find("Medium_Min") != string::npos) { roid.setRoidMdRng(false, stoi(val)); }
+		else if (key.find("Medium_Max") != string::npos) { roid.setRoidMdRng(true, stoi(val)); }
+		else if (key.find("Large_Min") != string::npos) { roid.setRoidLgRng(false, stoi(val)); }
+		else if (key.find("Large_Max") != string::npos) { roid.setRoidLgRng(true, stoi(val)); }
 
 		return roid;
 	}
@@ -440,9 +446,25 @@ namespace Settings {
 		roidStage = "Stage" + stage; 
 		roidStageI = stoi(stage);
 	}
+
 	void roidStageSettings::setRoidOStgMulRnd(bool bIsMax, float val) {
 		if (bIsMax) { roidOStgMulRnd.fHigh = val; }
 		else { roidOStgMulRnd.fLow = val; }
+	}
+
+	void roidStageSettings::setRoidSmRng(bool bIsMax, int val) {
+		if (bIsMax) { roidSmallRng.iHigh = val; }
+		else { roidSmallRng.iLow = val; }
+	}
+
+	void roidStageSettings::setRoidMdRng(bool bIsMax, int val) {
+		if (bIsMax) { roidMedRng.iHigh = val; }
+		else { roidMedRng.iLow = val; }
+	}
+
+	void roidStageSettings::setRoidLgRng(bool bIsMax, int val){
+		if (bIsMax) { roidLargeRng.iHigh = val; }
+		else { roidLargeRng.iLow = val; }
 	}
 
 	string roidStageSettings::getStage() { return roidStage; }
@@ -450,6 +472,9 @@ namespace Settings {
 	void roidStageSettings::setRoidStgMulti(float val) { roidStgMulti = val; }
 	Range roidStageSettings::getRoidOStgMulRnd() { return roidOStgMulRnd; }
 	float roidStageSettings::getRoidStgMulti() { return roidStgMulti; }
+	Range roidStageSettings::getRoidSmRng() { return roidSmallRng; }
+	Range roidStageSettings::getRoidMdRng() { return roidMedRng; }
+	Range roidStageSettings::getRoidLgRng() { return roidLargeRng; }
 
 
 	//oreTierSettings Functions
@@ -547,7 +572,7 @@ namespace Settings {
 	vector<diffSettings> gDiffSettings;
 	vector<pltTypeSettings> gPltTypSettings;
 	vector<roidStageSettings> gRoidStgSettings; //Stores all of the data related to specific ore/asteroid stages
-	extern vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
+	vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
 							
 	//Misc
 	map<string, string> rawSettings, rawSettingsTemp;

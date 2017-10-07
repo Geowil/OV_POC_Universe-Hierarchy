@@ -44,13 +44,13 @@ int main() {
 	if (!ds_main.openDB()) {
 		cout << "Problem opening database.  Please check error log." << endl;
 	} else {
-		ds_main.prepQuery("Settings", "select from", 0);
+		ds_main.prepQuery("Settings", "select from", 0, vector<string>());
 		setting::setSMap(ds_main.getSettings());
 		setting::loadPltSettings();
 
 		for (setting::pltTypeSettings pt : setting::gPltTypSettings) {
 			cout << pt.getSettingType() << " EKS Range: " << pt.getPltEksRng().fLow << "-" << pt.getPltEksRng().fHigh << endl;
-			cout << pt.getSettingType() << " Size Range: " << pt.getPltSzRng().fLow << "-" << pt.getPltSzRng().fHigh << endl;
+			cout << pt.getSettingType() << " Size Range: " << pt.getPltSzRng().iLow << "-" << pt.getPltSzRng().iHigh << endl;
 			cout << pt.getSettingType() << " Outlier Range: " << pt.getPltOutlrRng().fLow << "-" << pt.getPltOutlrRng().fHigh << endl;
 			cout << pt.getSettingType() << " Size Random Range: " << pt.getPltSzRndRng().fLow << "-" << pt.getPltSzRndRng().fHigh << endl;
 	

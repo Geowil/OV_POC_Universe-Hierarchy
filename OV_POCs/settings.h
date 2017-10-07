@@ -231,8 +231,15 @@ public:
 	void setRoidOStgMulRnd(bool bIsMax, float val);
 	void setRoidStgMulti(float val);
 
+	void setRoidSmRng(bool bIsMax, int val);
+	void setRoidMdRng(bool bIsMax, int val);
+	void setRoidLgRng(bool bIsMax, int val);
+
 	Range getRoidOStgMulRnd();
 	float getRoidStgMulti();
+	Range getRoidSmRng();
+	Range getRoidMdRng();
+	Range getRoidLgRng();
 
 private:
 	string roidStage;
@@ -240,6 +247,11 @@ private:
 
 	Range roidOStgMulRnd;
 	float roidStgMulti;
+
+	//Ranges that determine what rates ore stages are used within certain roid sizes
+	Range roidSmallRng;
+	Range roidMedRng;
+	Range roidLargeRng;
 
 };
 

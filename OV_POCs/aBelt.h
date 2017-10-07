@@ -9,9 +9,12 @@
 #include "object.h"
 #include "resource.h"
 #include "dataStructs.h"
+#include "settings.h"
 
 using std::string;
 using std::vector;
+
+namespace setting = Settings;
 
 class aBelt : public Object{
 public:
@@ -21,13 +24,14 @@ public:
 	aBelt(string name, float size, int ramount, bool full);
 
 	void createAsteroids(float secLvl); //Create asteroids in a belt
-	void addAsteroid(int aid, string aName, string aOName, int aID, string aDesc, float aSize, float aOAmount, float x, float y, float z); //Add an asteroid to the belt
+	void addAsteroid(string aName, float aSize, float x, float y, float z); //Add an asteroid to the belt
 	void removeAsteroid(int i);
 
 	string getName();
 	float getSize();
-	void getOre();
-	void processOre();
+	void procAstrSize1(setting::oreTierSettings tier);
+	void procAstrSize2(setting::oreTierSettings tier, setting::roidStageSettings oreStg);
+	void getOre(string tier, string stage);
 
 	bool isFull();
 
@@ -40,15 +44,15 @@ private:
 	string aBName; //Astroid belt name
 	string astName;
 
-	vector<vector<Resource>> oreStages;
-	vector<Resource> tempResVec; //Temp vector storage for insertion into oreStages
+	vector<Resource> tempResVec; //Temp vector storage for processing
 	vector<strcResc> strRescs; //Vector to store the struct representation data
 
-	float oreTier;
+	float oreTier,roidSizeCat;
+	int oreStage,oreEle;
 
 	float rand1, rand2, rand5, tempSize1, tempSize2, tempSize3;
 	int rand3, rand4, numOfAsteroids, aID, randx, randy, randz, aBVal;
 
-	int i1, i2, i3, asteroid_id;
+	int i1, i2, i3;
 };
 #endif

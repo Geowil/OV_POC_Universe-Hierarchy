@@ -10,18 +10,19 @@ using std::string;
 class Resource {
 public:
 	Resource();
-
-	void setupRes(int id, string name, string desc, string type, string ore, int stg, int tier, float bsize, float sg2);
+	Resource(int id, string name, string desc, string type, int stg, int tier, float bsize, float sg2, float amt);
 
 	int getID();
 	string getName();
 	string getType();
 	int getTier();
-	string getOre();
 	int getStage();
 	float getBaseSz();
 	float getSG2();
 	string getDesc();
+	float getOAmt();
+
+	void updateOAmt(string operation, float val);
 
 private:
 	int resID;
@@ -32,7 +33,7 @@ private:
 	string resType; //Is this an ore or a resource
 	float resBaseSize; //Used for calculating asteroid size
 	float resSG2;
-	string resOre; //Ore name, if any
+	float resOAmt; //Ore Amount
 };
 
 #endif;

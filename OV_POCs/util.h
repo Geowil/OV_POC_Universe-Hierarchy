@@ -25,6 +25,10 @@ namespace Util {
 	extern int calcXP(int base, int level, float factor);
 	extern bool validateInpInt(int val, int min, int max);
 
+	extern int updateVal(string op, int val1, int val2);
+	extern float updateVal(string op, float val1, float val2);
+	extern long long int updateVal(string op, long long int val1, long long int val2);
+
 	//Utility Members
 	extern map<string, float>::iterator itf1;
 	extern map<string, int>::iterator iti1;

@@ -14,30 +14,30 @@ class dataSystem;
 class Asteroid : public Object {
 public:
 	Asteroid();
-	Asteroid(int aid, float size, float oamount, float x, float y, float z); //Constructor to add astroid to vector
+	Asteroid(string name, float size, float x, float y, float z); //Constructor to add astroid to vector
+	Asteroid(int id, string name, float size, float x, float y, float z); //Constructor to add astroid to vector
 
-	void updateOAmount(float amount, string operation);
+	
 
-	string getName(int pos);
-	string getDesc(int pos);
-	string getOName(int pos);
+	string getName();
+	string getODesc(int pos);
+
+	void updateOAmt(int pos, float val, string operation);
+
 	int getAID();
 
 	float getSize();
-	float getOAmount();
+	float getOAmount(int pos);
 
 	int getOID(int pos);
 	void addOre(Resource ore);
 
 private:
-	int aID; //Asteroid ID
-	string aDesc; //Asteroid description
-
+	string aName;
+	int aID; //Used for updating in save file
 	float aSize; //Asteroid size
-	float aOAmount; //Asteroid ore amount
 
 	vector<Resource>aOre; //Ore(s) contained in this asteroid
-
 };
 #endif
 

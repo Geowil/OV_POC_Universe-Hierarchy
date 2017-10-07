@@ -179,8 +179,25 @@ namespace Util {
 	int getIRand(int low, int high) { return std::uniform_int_distribution<>{low, high}(gen); }
 	float getFRand(float low, float high) { return std::uniform_real_distribution<float> {low, high}(gen); }
 
-	extern bool validateInpInt(int val, int min, int max) {
+	bool validateInpInt(int val, int min, int max) {
 		if (val < min || val > max) { return false; }
 		else { return true; }
+	}
+
+	int updateVal(string op, int val1, int val2) {
+		if (op == "set") { return val1; }
+		else if (op == "add") { return val1 + val2; }
+		else if (op == "sub") { return val2 - val1; }
+	}
+
+	float updateVal(string op, float val1, float val2) {
+		if (op == "set") { return val1; }
+		else if (op == "add") { return val1 + val2; }
+		else if (op == "sub") { return val2 - val1; }
+	}
+	long long int updateVal(string op, long long int val1, long long int val2) {
+		if (op == "set") { return val1; }
+		else if (op == "add") { return val1 + val2; }
+		else if (op == "sub") { return val2 - val1; }
 	}
 }
