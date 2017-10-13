@@ -8,7 +8,14 @@
 #include <Windows.h>
 #include <map>
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+using std::system;
+using std::map;
+
 namespace u = Util;
 namespace setting = Settings;
 
@@ -44,40 +51,16 @@ int main() {
 	if (!ds_main.openDB()) {
 		cout << "Problem opening database.  Please check error log." << endl;
 	} else {
-		ds_main.prepQuery("Settings", "select from", 0, vector<string>());
+		ds_main.prepQuery("Settings", "select from", 0, u::blankCond);
 		setting::setSMap(ds_main.getSettings());
-		setting::loadPltSettings();
-
-		for (setting::pltTypeSettings pt : setting::gPltTypSettings) {
-			cout << pt.getSettingType() << " EKS Range: " << pt.getPltEksRng().fLow << "-" << pt.getPltEksRng().fHigh << endl;
-			cout << pt.getSettingType() << " Size Range: " << pt.getPltSzRng().iLow << "-" << pt.getPltSzRng().iHigh << endl;
-			cout << pt.getSettingType() << " Outlier Range: " << pt.getPltOutlrRng().fLow << "-" << pt.getPltOutlrRng().fHigh << endl;
-			cout << pt.getSettingType() << " Size Random Range: " << pt.getPltSzRndRng().fLow << "-" << pt.getPltSzRndRng().fHigh << endl;
-	
-			cout << endl << endl;
-		}
-
-		/*for (string diff : setting::gameDiffs) {
-			cout << i1 << ": " << diff << endl;
-			i1++;
-		}
 		
-		cout << endl;
-		cout << "Please select the game difficulty: >";
-		cin >> gDiffSelect;
-		cout << endl;
-		 
-		if (cin && u::validateInpInt(gDiffSelect, 1, setting::gameDiffs.size())) {
-			system("CLS");
+		setting::loadSettings();
+		setting::loadPltSettings();
+		setting::loadDiffSettings();
+		setting::loadOreTypeSettings();
+		setting::loadRoidOSettings();
 
-			setting::setDifficulty(setting::gameDiffs.at(gDiffSelect - 1));
-			setting::loadDiffSettings();
-			setting::setDiffSettings();
-			cout << "You have chosen " << setting::sGameDifficulty << ".  Here is how this setting affects the game: " << endl << endl;
-			setting::printMods();
-		} else {
-			cout << "You made an invalid entry" << endl;
-		}*/
+		uni_main.createUniverse();
 	}
 
 	system("pause");

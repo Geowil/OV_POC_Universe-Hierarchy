@@ -23,10 +23,8 @@ namespace Settings {
 			setPltPopRand2Rng(true, rawSettings.at("Planet_Pop_Rand2_Max"));
 			setPltPopRand3Rng(false, rawSettings.at("Planet_Pop_Rand3_Min"));
 			setPltPopRand3Rng(true, rawSettings.at("Planet_Pop_Rand3_Max"));
-			setPltDefRandRng(false, rawSettings.at("Planet_Def_Rand_Min"));
-			setPltDefRandRng(true, rawSettings.at("Planet_Def_Rand_Max"));
-			setPltShdRandRng(false, rawSettings.at("Planet_Shd_Rand_Min"));
-			setPltShdRandRng(true, rawSettings.at("Planet_Shd_Rand_Max"));
+			setPltDefRandRng(rawSettings.at("Planet_Def_Rand_Max"));
+			setPltShdRandRng(rawSettings.at("Planet_Shd_Rand_Max"));
 			setPltSzRandRng(false, rawSettings.at("Planet_Size_Rand_Min"));
 			setPltSzRandRng(true, rawSettings.at("Planet_Size_Rand_Max"));
 			setPltEksRandRng(false, rawSettings.at("Planet_EKS_Range_Min"));
@@ -175,6 +173,12 @@ namespace Settings {
 		else if (key.find("Outlier_Range_Max") != string::npos) { plts.setPltOutlrRng(true, stof(val)); }
 		else if (key.find("Size_Rand_Min") != string::npos) { plts.setPltSzRndRng(false, stof(val)); }
 		else if (key.find("Size_Rand_Max") != string::npos) { plts.setPltSzRndRng(true, stof(val)); }
+		else if (key.find("Def_Max") != string::npos) {
+			if (val != "0") { plts.addPltDefRng(stof(val)); }
+		}
+		else if (key.find("Shd_Max") != string::npos) {
+			if (val != "0") { plts.addPltShdRng(stof(val)); }
+		}
 
 		return plts;
 	}
@@ -245,15 +249,8 @@ namespace Settings {
 		else { pltPopRand3.fLow = stof(val); }
 	}
 	
-	void setPltDefRandRng(bool bIsMax, string val){
-		if (bIsMax) { pltDefRand.fHigh = stof(val); }
-		else { pltDefRand.fLow = stof(val); }
-	}
-	
-	void setPltShdRandRng(bool bIsMax, string val){
-		if (bIsMax) { pltShdRand.fHigh = stof(val); }
-		else { pltShdRand.fLow = stof(val); }
-	}
+	void setPltDefRandRng(string val) { pltDefRand.fHigh = stof(val); }	
+	void setPltShdRandRng(string val) { pltShdRand.fHigh = stof(val); }
 	
 	void setPltSzRandRng(bool bIsMax, string val){
 		if (bIsMax) { pltSizeRand.iHigh = stoi(val); }
@@ -324,7 +321,6 @@ namespace Settings {
 	}
 
 	void setUnvExpRate(string val) { unvExpRate = stoi(val); }
-
 	vector<string> splitVal(string val) {		
 		vector<string> temp;
 		curPos = val.find(',');
@@ -439,6 +435,21 @@ namespace Settings {
 	}
 
 	Range pltTypeSettings::getPltSzRndRng() { return plSizeRndRng; }
+
+	void pltTypeSettings::addPltDefRng(float maxVal) {
+		plDefRngs.push_back(Range());
+		plDefRngs.at(plDefRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
+	}
+	
+	void pltTypeSettings::addPltShdRng(float maxVal){
+		plShdRngs.push_back(Range());
+		plShdRngs.at(plShdRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
+	}
+
+	float pltTypeSettings::getPltDefRng(int pos) { return plDefRngs.at(pos).fHigh; }
+	float pltTypeSettings::getPltShdRng(int pos) { return plShdRngs.at(pos).fHigh; }
+	int pltTypeSettings::getPltDefRngSz() { return plDefRngs.size(); }
+	int pltTypeSettings::getPltShdRngSz() { return plShdRngs.size(); }
 
 
 	//roidStageSettings Functions

@@ -6,18 +6,18 @@
 #include <utility>
 #include "object.h"
 #include "inventory.h"
-#include "dataStructs.h"
 
 using std::string;
 using std::vector;
-using std::pair;
 
 class Store : public Object{
 public:
 	Store();
-	Store(string name);
+	Store(string name, string type);
+	Store(int id, string name, string type, vector<Item> items); //Loading
 
-	void addInventory(vector<invSetup> newInv); //Add new items to inventory
+	void addInventory(vector<Item> newInv); //Add new items to inventory
+	void updateInventory(int pos, Item it, string op1, string op2);
 	vector<Item> getItems();
 
 private:

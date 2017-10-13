@@ -15,7 +15,7 @@ using std::vector;
 class Planet : public Object{
 public:
 	Planet();  //constructor
-	Planet(string name); //constructor 2
+	Planet(string name, float slvl); //constructor 2
 	Planet(string name, float eks, long long int pop, float slvl); //constructor 3
 
 	Planet createPlanet() { return Planet(); }

@@ -3,40 +3,36 @@
 
 #include <string>
 #include <vector>
+#include "object.h"
 
 using std::string;
 using std::vector;
 
-class Defense {
+class Defense : public Object {
 public:
 	Defense(); //defense contructor
 	Defense(string name); //defense contructor
 
 	Defense* rDefense();
 
-	string getName(); //get weapon name
 
 										 
 private:
-	
-	string	dName; //name
 			
 };
 
 
-class Shield {
+class Shield : public Object {
 public:
 	Shield();
 	Shield(string name);
 
 	Shield* rShield();
 	
-	string getName();
 
 	
 
 private:
-	string	mName;
 	
 };
 #endif

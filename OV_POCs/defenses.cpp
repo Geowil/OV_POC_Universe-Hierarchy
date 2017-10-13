@@ -1,31 +1,19 @@
 #include "defenses.h"
+#include "util.h"
 
 Defense::Defense() {}
-
 Defense::Defense(string name) {
-	dName = name;
+	oName = name;
 }
 
-Defense* Defense::rDefense() {
-	return this;
-}
-
-string Defense::getName() {
-	return dName;
-}
+Defense* Defense::rDefense() { return this; }
 
 //Shield Functions
 Shield::Shield() {}
-
 Shield::Shield(string name) {
-	mName = name;
+	oName = name;
 }
 
-Shield* Shield::rShield() {
-	return this;
-}
+Shield* Shield::rShield() { return this; }
 
-string Shield::getName() {
-	return mName;
-}
 

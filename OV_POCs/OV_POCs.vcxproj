@@ -149,6 +149,7 @@
     <ClInclude Include="dataStructs.h" />
     <ClInclude Include="dataSystem.h" />
     <ClInclude Include="defenses.h" />
+    <ClInclude Include="gamemanager.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="load.h" />

@@ -17,26 +17,20 @@ public:
 	Asteroid(string name, float size, float x, float y, float z); //Constructor to add astroid to vector
 	Asteroid(int id, string name, float size, float x, float y, float z); //Constructor to add astroid to vector
 
+	void updateRoid(Asteroid roid);
 	
-
-	string getName();
 	string getODesc(int pos);
-
 	void updateOAmt(int pos, float val, string operation);
-
-	int getAID();
 
 	float getSize();
 	float getOAmount(int pos);
 
 	int getOID(int pos);
-	void addOre(Resource ore);
+	void addOre(int id, string name, string desc, string typ, int stage, int tier, float basesz, float sg2, float amt);
+	int getaOreSz();
 
 private:
-	string aName;
-	int aID; //Used for updating in save file
 	float aSize; //Asteroid size
-
 	vector<Resource>aOre; //Ore(s) contained in this asteroid
 };
 #endif

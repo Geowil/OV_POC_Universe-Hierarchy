@@ -3,9 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "range.h"
 #include "asteroid.h"
-#include "random.cpp"
 #include "object.h"
 #include "resource.h"
 #include "dataStructs.h"
@@ -22,12 +20,13 @@ public:
 	aBelt();
 	aBelt(string name, float size, bool full);
 	aBelt(string name, float size, int ramount, bool full);
+	aBelt(int id, string name, float size, int ramount, bool full);
 
 	void createAsteroids(float secLvl); //Create asteroids in a belt
 	void addAsteroid(string aName, float aSize, float x, float y, float z); //Add an asteroid to the belt
+	//void updateAsteroid(Asteroid roid, int pos);
 	void removeAsteroid(int i);
 
-	string getName();
 	float getSize();
 	void procAstrSize1(setting::oreTierSettings tier);
 	void procAstrSize2(setting::oreTierSettings tier, setting::roidStageSettings oreStg);
@@ -35,24 +34,18 @@ public:
 
 	bool isFull();
 
-	vector<Asteroid> roids;
+	//Asteroid getRoid(int pos);
+	//vector<Asteroid> getRoids();
 
 private:
+	float aBSize; //Asteroid belt size; see below
+	vector<Asteroid> roids;
 
 	bool bIsABFull; //bool: is asteroid belt full?
-	float aBSize; //Asteroid belt size; see below
-	string aBName; //Astroid belt name
-	string astName;
-
 	vector<Resource> tempResVec; //Temp vector storage for processing
 	vector<strcResc> strRescs; //Vector to store the struct representation data
 
-	float oreTier,roidSizeCat;
-	int oreStage,oreEle;
-
-	float rand1, rand2, rand5, tempSize1, tempSize2, tempSize3;
-	int rand3, rand4, numOfAsteroids, aID, randx, randy, randz, aBVal;
-
-	int i1, i2, i3;
+	float oreTier, roidSizeCat, tempSize1, tempSize2, tempSize3;
+	int oreStage, oreEle, numOfAsteroids, i1, i2, i3;
 };
 #endif

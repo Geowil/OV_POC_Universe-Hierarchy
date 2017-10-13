@@ -14,16 +14,15 @@ public:
 	planetarySystem();
 	planetarySystem(string sysName);
 	planetarySystem(string sysName, float sec);
+	planetarySystem(int id, string sysName, float sec);
 
 	planetarySystem createPSystem() { return planetarySystem(); }
 
-	void setName(string name);
 	
 	float getSecRating();
-	string getName();
 
 	void createPlanets();
-	void addPlanet(string name);
+	void addPlanet(Planet plt); //Only used when loading
 	void modifyPlanet(Planet pl);
 	vector<Planet> getPlanets();
 	Planet getPlanet(int index);
@@ -32,24 +31,26 @@ public:
 	void updateSecRating(float sec, string operation);
 	void generatePlanets();
 
+	int getDefenses(float rand, float eks);
+	int getShields(float rand, float eks);
+	float calcPop(float pERand, float pSRand, float popRand1, float popRand2, float popRand3);
 
 	Planet addDefenses(Planet plt);
 	Planet addShields(Planet plt);
 
 private:
-	string plsName;
 	float plsSec; //Security Rating
+	vector<Planet> plsPlanets;
 
-	float pERand2; //External value tag: float range
-	int pSRRand2; //External value tag: int range
-	float pSRand2;
-	float pPStore2; //Calculate the population and return to pPStore2
+	float pERand2, pSRand2, pPStore2;
+	int pSRRand2, numODef, numOShd;
 	long long int pPMax2;
 	bool bPPGen2;
 
-	int numODef, numOShd;
-	Planet pltInst;
-
-	vector<Planet> plsPlanets;
+	Planet pltInst; //Temp instance to store a planet while being generated
+		
+	int nOfDef;
+	int nOfShd;
+	int i1; //Iterators
 };
 #endif

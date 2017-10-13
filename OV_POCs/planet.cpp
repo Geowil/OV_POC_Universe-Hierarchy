@@ -33,9 +33,10 @@ This is a resource balancing feature but will be tweakable by players/modders in
 //Planet Functions
 Planet::Planet() {}
 
-Planet::Planet(string name) {
+Planet::Planet(string name, float slvl) {
 
 	plName = name;
+	plSecLvl = slvl;
 	bIsDest = false;
 }
 
@@ -231,7 +232,7 @@ aBelt Planet::getABelt(int index) {
 }
 
 void Planet::createMoons() {
-	beltRand = Util::getIRand(0, 10);
+	beltRand = Util::getIRand(0, 3);
 
 	if (beltRand != 0) {
 		for (i = 1; i <= beltRand; i++) {
@@ -268,7 +269,7 @@ Moon Planet::getMoon(int index) {
 }
 
 void Planet::createStations() {
-	beltRand = Util::getIRand(0, 10);
+	beltRand = Util::getIRand(0, 2);
 
 	if (beltRand != 0) {
 		for (i = 1; i <= beltRand; i++) {

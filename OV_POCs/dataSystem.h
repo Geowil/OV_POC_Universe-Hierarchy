@@ -23,6 +23,7 @@ public:
 	void prepQueryVec(string table, string stmtOperation, vector<int> ids, vector<string> whereConds); //Get multiple specific item data from table
 	bool openDB();
 	bool openSave();
+	void closeDB();
 
 	//create function for querying based on conditions with unknown ids such as cpus with x power requirement which are for destroyers
 
@@ -178,7 +179,6 @@ private:
 	string getStrCol(sqlite3_stmt* s, int colNum, int line);
 	void checkValidity(const char* data, string table, int line);
 	void finalize(sqlite3_stmt* stmt, int line);
-	void closeDB();
 
 	sqlite3 *dBase;
 	sqlite3_stmt* sStmt;

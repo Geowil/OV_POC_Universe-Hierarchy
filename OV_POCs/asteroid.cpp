@@ -1,53 +1,38 @@
 #include "asteroid.h"
 
-
-Asteroid::Asteroid() {
-
-}
-
+Asteroid::Asteroid() {}
 Asteroid::Asteroid(string name, float size, float x, float y, float z) {
 	aSize = size;
-	aName = name;
+	oName = name;
 	xPos = x;
 	yPos = y;
 	zPos = z;
 }
 
 Asteroid::Asteroid(int aid, string name, float size, float x, float y, float z) {
-	aID = aid;	
+	oID = aid;	
 	aSize = size;
-	aName = name;
+	oName = name;
 	xPos = x;
 	yPos = y;
 	zPos = z;
 }
 
-string Asteroid::getName() {
-	return aName;
+void Asteroid::updateRoid(Asteroid roid) {
+	aSize = roid.getSize();
+	oName = roid.getName();
+	xPos = roid.getXPos();
+	yPos = roid.getYPos();
+	zPos = roid.getZPos();
 }
 
-void Asteroid::updateOAmt(int pos, float val, string operation) {
-	aOre.at(pos).updateOAmt(operation, val);
+void Asteroid::updateOAmt(int pos, float val, string operation) { aOre.at(pos).updateOAmt(operation, val); }
+string Asteroid::getODesc(int pos) { return aOre.at(pos).getDesc(); }
+float  Asteroid::getSize() { return aSize; }
+float  Asteroid::getOAmount(int pos) { return aOre.at(pos).getOAmt(); }
+int Asteroid::getOID(int pos) { return aOre.at(pos).getID(); }
+void Asteroid::addOre(int id, string name, string desc, string typ, int stage, int tier, float basesz, float sg2, float amt) {
+	aOre.push_back(Resource(id,name,desc,typ,stage,tier,basesz,sg2,amt)); 
 }
 
-string Asteroid::getODesc(int pos) {
-	return aOre.at(pos).getDesc();
-}
-
-float  Asteroid::getSize() {
-	return aSize;
-}
-
-float  Asteroid::getOAmount(int pos) {
-	return aOre.at(pos).getOAmt();
-}
-
-int Asteroid::getOID(int pos) {
-	return aOre.at(pos).getID();
-}
-
-int Asteroid::getAID() {
-	return aID;
-}
-
-void Asteroid::addOre(Resource ore) { aOre.push_back(Resource(ore.getID(), ore.getName(), ore.getDesc(), ore.getType(), ore.getStage(), ore.getTier(), ore.getBaseSz(), ore.getSG2(), 0.0f)); }
+int Asteroid::getaOreSz() { return aOre.size(); }

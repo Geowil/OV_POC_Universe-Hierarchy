@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "plSystem.h"
+#include "dataStructs.h"
 
 using std::string;
 using std::vector;
@@ -13,6 +14,7 @@ public:
 	Universe();
 
 	void createUniverse();
+	void loadSystemNames();
 	void createPlSystems();
 	void addSystem(string name);
 	void updateSystem(planetarySystem plSys);
@@ -30,9 +32,16 @@ private:
 	int uTTNextExp; //Time to next expansion
 	int uTSLastExp; //Time since last expansion
 	int uNOfExp; //Number of expansions for calculations
-
+	vector<string> uSysNames; //List of names from the database to be used for system creation
 	float uSize; //Universe size in ?; how would this be useful or needed?
+	
+
+	int sysNmEl; //Element position for current system name
+	string curSysName; //Storage for system creation	
 	planetarySystem plSysInst;
+	vector<strcSysName> tempSysNms;
+
+	float sec;
 };
 
 #endif

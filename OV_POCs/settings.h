@@ -53,8 +53,8 @@ namespace Settings {
 	extern void setPltPopRand1Rng(bool bIsMax, string val);
 	extern void setPltPopRand2Rng(bool bIsMax, string val);
 	extern void setPltPopRand3Rng(bool bIsMax, string val);
-	extern void setPltDefRandRng(bool bIsMax, string val);
-	extern void setPltShdRandRng(bool bIsMax, string val);
+	extern void setPltDefRandRng(string val);
+	extern void setPltShdRandRng(string val);
 	extern void setPltSzRandRng(bool bIsMax, string val);
 	extern void setPltEksRandRng(bool bIsMax, string val);
 	extern void setUnvStrtSysAmt(string val);
@@ -198,7 +198,14 @@ public:
 	string getSettingType();
 	//int getPltType();
 
-	//void setSetting(string key, string val);
+	void addPltDefRng(float maxVal);
+	void addPltShdRng(float maxVal);
+
+	float getPltDefRng(int pos);
+	float getPltShdRng(int pos);
+
+	int getPltDefRngSz();
+	int getPltShdRngSz();
 
 	void setPltEksRng(bool bIsMax, float val);
 	Range getPltEksRng();
@@ -220,6 +227,8 @@ private:
 	Range plSizeRng;
 	Range plOutlierRng;
 	Range plSizeRndRng;
+	vector<Range> plDefRngs;
+	vector<Range> plShdRngs;
 };
 
 class Settings::roidStageSettings {

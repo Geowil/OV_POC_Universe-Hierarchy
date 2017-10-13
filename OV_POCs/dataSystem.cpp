@@ -39,14 +39,11 @@ void dataSystem::buildStmt(string table, string operation, int id, vector<string
 		rows = -1; //-1 is an ad-hoc flag to pull the count of the table later on
 	} else if (operation == "select from where" && id == 0 && whereConds.size() > 0) {
 		//Type = 'Ore', Stage = '1'
-		whereCondStr = "Where ";
+		whereCondStr = " Where ";
 
 		for (i1 = 0; i1 < whereConds.size(); i1++) {
-			if (i1 == whereConds.size() - 1) {
-				whereCondStr += whereConds.at(i1);
-			} else {
-				whereCondStr += whereConds.at(i1) + " and ";
-			}
+			if (i1 == whereConds.size() - 1) { whereCondStr += whereConds.at(i1); }
+			else { whereCondStr += whereConds.at(i1) + " and "; }
 		}
 
 		sqlStr = "Select * From " + table + whereCondStr;
@@ -77,17 +74,14 @@ void dataSystem::buildStmt(string table, string operation, vector<int> ids, vect
 	for (i1 = 0; i1 < ids.size(); i1++) {
 		string sID = to_string(ids.at(i1));
 		
-		if (i1 == ids.size() - 1) {
-			whereCondStr += sID + ")";
-		} else {
-			whereCondStr += sID + ",";
-		}
+		if (i1 == ids.size() - 1) { whereCondStr += sID + ")"; }
+		else { whereCondStr += sID + ","; }
 	}
 
 	if (operation == "select from") {
 		sqlStr = "Select * From " + table + whereCondStr;
 
-		rows = ids.size(); //Same as for build from range, filtering will cause some issues with the logic as is
+		rows = ids.size(); //Same as for build from range, filtering will cause some issues with the logic as is; TODO: think about handling for scenario where not all ids passed to funtions are present in the database
 	}
 
 	sqlStmt = sqlStr.c_str();
@@ -976,7 +970,7 @@ void dataSystem::procStep(string table, int line) {
 	bStepErr = false;
 	int rslt = sqlite3_step(stmt);
 	
-	if (rslt != SQLITE_ROW) {
+	if (rslt != SQLITE_ROW && rslt != SQLITE_DONE && rslt != SQLITE_OK) {
 		bStepErr = true;
 
 		u::createBInfo("Err", __FILE__, to_string(line), __DATE__, __TIME__, "Err001", "Query on " + table + " failed: " + sqlite3_errmsg(dBase), "./OV_Log.txt");
@@ -987,7 +981,7 @@ void dataSystem::procStep2(string table, int line) {
 	bStepErr = false;
 	int rslt = sqlite3_step(stmt2);
 
-	if (rslt != SQLITE_ROW) {
+	if (rslt != SQLITE_ROW && rslt != SQLITE_DONE && rslt != SQLITE_OK) {
 		bStepErr = true;
 
 		u::createBInfo("Err", __FILE__, to_string(line), __DATE__, __TIME__, "Err001", "Query on " + table + " failed: " + sqlite3_errmsg(dBase), "./OV_Log.txt");
@@ -3052,7 +3046,9 @@ void dataSystem::checkValidity(const char* data, string table, int line) {
 }
 
 int dataSystem::getRtnRows(string table, int line) {
-	sqlStr2 = "Select Count(*) from " + table;
+	if (whereCondStr.length() != 0){ sqlStr2 = "Select Count(*) from " + table + whereCondStr; }
+	else{ sqlStr2 = "Select Count(*) from " + table; }
+	
 	sqlStmt2 = sqlStr2.c_str();
 
 	stmt2 = prepStmt2(sqlTable, __LINE__);

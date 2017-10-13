@@ -1,7 +1,8 @@
 #include "aBelt.h"
 #include "util.h"
-#include "consts.h"
 #include "dataSystem.h"
+#include "range.h"
+#include "random.cpp"
 #include <iostream>
 #include <utility>
 
@@ -17,13 +18,21 @@ using Settings::gRoidStgSettings;
 aBelt::aBelt() {}
 
 aBelt::aBelt(string name, float size, bool full) {
-	aBName = name;
+	oName = name;
 	aBSize = size;
 	bIsABFull = full;
 }
 
 aBelt::aBelt(string name, float size, int ramount, bool full) {
-	aBName = name;
+	oName = name;
+	aBSize = size;
+	numOfAsteroids = ramount;
+	bIsABFull = full;
+}
+
+aBelt::aBelt(int id, string name, float size, int ramount, bool full) {
+	oID = id;
+	oName = name;
 	aBSize = size;
 	numOfAsteroids = ramount;
 	bIsABFull = full;
@@ -34,6 +43,8 @@ void aBelt::createAsteroids(float secLvl) {
 	tempSize1 = 0.0f;
 	tempSize2 = 0.0f;
 	tempSize3 = 0.0f;
+
+	ds_ab.openDB();
 
 	while (!bIsABFull) {
 		oreTier = u::getFRand(1.0, 100.0);
@@ -73,49 +84,11 @@ void aBelt::createAsteroids(float secLvl) {
 				}
 			}
 		}
-		
-		/*rand5 = u::getFRand(setting::, 50.0f);
-
-		
-		if ((rand5 >= 1.0f) && (rand5 <= 37.5f)) 
-		{
-			aID = Util::getIRand(0, 2); //Ore ID
-			tempSize1 = oreBVal[aID];
-			i3 = getOStage(aID);
-
-			//asteroid size calcualtion
-			tempSize1 = tempSize1 * Util::getFRand(std::get<0>(roidOSSMulti[i3]), std::get<1>(roidOSSMulti[i3]));
-			tempSize2 = (((tempSize1 * 10) / 4) * astSMulti[i3]);
-			tempSize3 += tempSize2;
-
-			astName = oreNames[aID];
-
-		} else if ((rand5 > 37.5f) && (rand5 <= 45.0f)){
-			aID = Util::getIRand(3, 5);
-			tempSize1 = oreBVal[aID];
-			i3 = getOStage(aID);
-
-			//asteroid size calcualtion
-			tempSize1 = tempSize1 * Util::getFRand(std::get<0>(roidOSSMulti[i3]), std::get<1>(roidOSSMulti[i3]));
-			tempSize2 = (((tempSize1 * 10) / 4) * astSMulti[i3]);
-			tempSize3 += tempSize2;
-
-			astName = oreNames[aID];		
-		} else if ((rand5 > 45.0f) && (rand5 <= 50.0f)) {
-			aID = Util::getIRand(6, 8);
-			tempSize1 = oreBVal[aID];
-			i3 = getOStage(aID);
-
-			//asteroid size calcualtion
-			tempSize1 = tempSize1 * Util::getFRand(std::get<0>(roidOSSMulti[i3]), std::get<1>(roidOSSMulti[i3]));
-			tempSize2 = (((tempSize1 * 10) / 4) * astSMulti[i3]);
-			tempSize3 += tempSize2;
-
-			astName = oreNames[aID];
-		}*/
 
 		//TODO: In version 1.0 this function will need to change for positioning to include consideration for asteroid object bounds so asteroids are not stuck inside, fully or partially, other asteroids.
-		addAsteroid(tempResVec.at(oreEle).getName(), tempSize2, Util::getFRand(-10.0f, 30.0f), Util::getFRand(-8.0f, 21.0f), Util::getFRand(-13.0f, 32.0f));
+		addAsteroid(tempResVec.at(oreEle).getName(), tempSize2, u::getFRand(-10.0f, 30.0f), u::getFRand(-8.0f, 21.0f), u::getFRand(-13.0f, 32.0f));
+
+		tempResVec.clear();
 
 		//Check to see if tempSize2 is greater thean aBSize
 		if (tempSize3 > aBSize) {
@@ -141,25 +114,24 @@ void aBelt::createAsteroids(float secLvl) {
 						roids.erase(roids.begin() + i3 + 1); //And then from the vector
 
 						bIsABFull = false; //reset to false as it is no longer full
+						break;
 					}
 				}
 			}
 		}
 	}
+
+	ds_ab.closeDB();
 }
 
 void aBelt::addAsteroid(string aName, float aSize, float x, float y, float z) {
 	roids.push_back(Asteroid(aName, aSize, x, y, z));
 
 	//Dirty way but easy
-	for (i1 = 0; i1 < tempResVec.size(); i1++) {
-		roids.at(roids.size() - 1).addOre(tempResVec.at(i1));
-		roids.at(roids.size() - 1).updateOAmt(i1, (aSize / tempResVec.at(i1).getSG2()), "set"); //In future, for multi-ore roids need to divide aSize by number of ores before this point
-	}	
-}
+	Resource ore = tempResVec.at(oreEle);
+	roids.at(roids.size() - 1).addOre(ore.getID(), ore.getName(), ore.getDesc(), ore.getType(), ore.getStage(),ore.getTier(),ore.getBaseSz(),ore.getSG2(), (aSize / ore.getSG2()));
 
-string aBelt::getName() {
-	return aBName;
+	ore = Resource(); //clear it
 }
 
 float aBelt::getSize() {
@@ -175,17 +147,13 @@ bool aBelt::isFull() {
 }
 
 void aBelt::getOre(string tier, string stage) {
-	if (!ds_ab.openDB()) {
-		cout << "Problem opening database.  Please check error log." << endl;
-	} else {
-		vector<string> conds = { "Type = 'Ore'", "Teir = '" + tier + "'", "Stage = '" + stage + "'"};
-		ds_ab.prepQuery("Resources","select from where",0,conds);
+	vector<string> conds = { "Type = 'Ore'", "Tier = " + tier , "Stage = " + stage};
+	ds_ab.prepQuery("Resources","select from where",0,conds);
 
-		strRescs = ds_ab.getRescs();
+	strRescs = ds_ab.getRescs();
 
-		for (strcResc rsc : strRescs) {
-			tempResVec.push_back(Resource(rsc.id, rsc.name, rsc.desc, rsc.typ, rsc.stg, rsc.tier, rsc.bsize, rsc.sg2, 0.0f));
-		}
+	for (strcResc rsc : strRescs) {
+		tempResVec.push_back(Resource(rsc.id, rsc.name, rsc.desc, rsc.typ, rsc.stg, rsc.tier, rsc.bsize, rsc.sg2, 0.0f));
 	}
 }
 
@@ -196,7 +164,6 @@ void aBelt::procAstrSize1(setting::oreTierSettings tier) {
 		for (setting::roidStageSettings oreStg : setting::gRoidStgSettings) {
 			if (oreStage >= oreStg.getRoidSmRng().iLow && oreStage <= oreStg.getRoidSmRng().iHigh) {
 				procAstrSize2(tier, oreStg);
-
 				break;
 			}
 		}
@@ -205,18 +172,16 @@ void aBelt::procAstrSize1(setting::oreTierSettings tier) {
 		for (setting::roidStageSettings oreStg : setting::gRoidStgSettings) {
 			if (oreStage >= oreStg.getRoidMdRng().iLow && oreStage <= oreStg.getRoidMdRng().iHigh) {
 				procAstrSize2(tier, oreStg);
+				break;
 			}
-
-			break;
 		}
-	} else if (roidSizeCat > setting::roidLargeRng.fLow && roidSizeCat <= setting::roidLargeRng.fHigh) {
+	} else if (roidSizeCat >= setting::roidLargeRng.fLow && roidSizeCat <= setting::roidLargeRng.fHigh) {
 		//Determine the ore stage to use
 		for (setting::roidStageSettings oreStg : setting::gRoidStgSettings) {
 			if (oreStage >= oreStg.getRoidLgRng().iLow && oreStage <= oreStg.getRoidLgRng().iHigh) {
 				procAstrSize2(tier, oreStg);
+				break;
 			}
-
-			break;
 		}
 	}
 }
@@ -225,13 +190,15 @@ void aBelt::procAstrSize2(setting::oreTierSettings tier, setting::roidStageSetti
 	getOre(to_string(tier.getTierVal()), to_string(oreStg.getStageI())); //Populate temp resource vector for further processing
 
 	//Get a random val based on 0 to size of temp ore vect - 1
-	oreEle = u::getIRand(0, tempResVec.size() - 1);
+	if (tempResVec.size() > 0) {
+		oreEle = u::getIRand(0, tempResVec.size() - 1);
 
-	//Now use that ore in this asteroid
-	tempSize1 = tempResVec.at(oreEle).getBaseSz();
+		//Now use that ore in this asteroid
+		tempSize1 = tempResVec.at(oreEle).getBaseSz();
 
-	//asteroid size calcualtion
-	tempSize1 = tempSize1 * Util::getFRand(oreStg.getRoidOStgMulRnd().fLow, oreStg.getRoidOStgMulRnd().fHigh);
-	tempSize2 = (((tempSize1 * 10) / 4) * oreStg.getRoidStgMulti());
-	tempSize3 += tempSize2;
+		//asteroid size calcualtion
+		tempSize1 = tempSize1 * u::getFRand(oreStg.getRoidOStgMulRnd().fLow, oreStg.getRoidOStgMulRnd().fHigh);
+		tempSize2 = (((tempSize1 * 10) / 4) * oreStg.getRoidStgMulti());
+		tempSize3 += tempSize2;
+	}
 }
