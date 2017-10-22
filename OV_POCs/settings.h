@@ -200,6 +200,8 @@ public:
 
 	void addPltDefRng(float maxVal);
 	void addPltShdRng(float maxVal);
+	void addPltMoonCls(int val);
+	void addPltMoonAmt(int val);
 
 	float getPltDefRng(int pos);
 	float getPltShdRng(int pos);
@@ -219,6 +221,13 @@ public:
 	void setPltSzRndRng(bool bIsMax, float val);
 	Range getPltSzRndRng();
 
+	int getPltMnClsSz();
+	int getPltMnAmtSz();
+	int getPltMnCls(int pos);
+	int getPltMnAmt(int pos);
+
+	Range getPltMnClsRng();
+
 private:
 	string plSType;
 	int plType;
@@ -227,8 +236,11 @@ private:
 	Range plSizeRng;
 	Range plOutlierRng;
 	Range plSizeRndRng;
+	Range pltMoonCLS;
 	vector<Range> plDefRngs;
 	vector<Range> plShdRngs;
+	vector<int> pltMoonClsVect; //Stores single-range values for what types of moons can be generated for the given planet type
+	vector<int> pltMoonAmtVect; //Stores single-range values for the number of moons that can be generated for the given planet type
 };
 
 class Settings::roidStageSettings {

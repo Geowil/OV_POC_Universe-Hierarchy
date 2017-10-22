@@ -179,6 +179,16 @@ namespace Settings {
 		else if (key.find("Shd_Max") != string::npos) {
 			if (val != "0") { plts.addPltShdRng(stof(val)); }
 		}
+		else if (key.find("Moon_CLS_Vect") != string::npos) {
+			for (string sVal : splitVal(val)) {
+				plts.addPltMoonCls(stoi(sVal));
+			}
+		}
+		else if (key.find("Moon_Num_Vect") != string::npos) {
+			for (string sVal : splitVal(val)) {
+				plts.addPltMoonAmt(stoi(sVal));
+			}
+		}
 
 		return plts;
 	}
@@ -435,7 +445,11 @@ namespace Settings {
 	}
 
 	Range pltTypeSettings::getPltSzRndRng() { return plSizeRndRng; }
-
+	int pltTypeSettings::getPltMnClsSz() { return pltMoonClsVect.size(); }
+	int pltTypeSettings::getPltMnAmtSz() { return pltMoonAmtVect.size(); }
+	int pltTypeSettings::getPltMnCls(int pos) { return pltMoonClsVect.at(pos); }
+	int pltTypeSettings::getPltMnAmt(int pos) { return pltMoonAmtVect.at(pos); }
+	Range pltTypeSettings::getPltMnClsRng() { return pltMoonCLS; }
 	void pltTypeSettings::addPltDefRng(float maxVal) {
 		plDefRngs.push_back(Range());
 		plDefRngs.at(plDefRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
@@ -444,6 +458,14 @@ namespace Settings {
 	void pltTypeSettings::addPltShdRng(float maxVal){
 		plShdRngs.push_back(Range());
 		plShdRngs.at(plShdRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
+	}
+
+	void pltTypeSettings::addPltMoonCls(int val){
+		pltMoonClsVect.push_back(val);
+	}
+
+	void pltTypeSettings::addPltMoonAmt(int val){
+		pltMoonAmtVect.push_back(val);
 	}
 
 	float pltTypeSettings::getPltDefRng(int pos) { return plDefRngs.at(pos).fHigh; }
