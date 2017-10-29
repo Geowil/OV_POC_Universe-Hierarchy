@@ -1,0 +1,14 @@
+This file contains a list of every log code and its meaning for reference in bug reports and while developing logging output for program
+operational faults.
+
+Error Codes:
+Err001 - sqlite3_step() could not be executed
+Err002 - sqlite3_prepare_v2() could not prepare supplied sql stmt
+Err003 - Database or Save file not found
+Err004 - Supplied setting does not have two values
+
+
+Warning Codes:
+Warn001 - No columns queried from table
+Warn002 - Unexpected case value
+

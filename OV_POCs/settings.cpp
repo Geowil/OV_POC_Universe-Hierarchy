@@ -2,6 +2,9 @@
 #include <stdexcept>
 #include <algorithm>
 #include <iterator>
+#include "util.h"
+
+namespace u = Util;
 
 namespace Settings {
 
@@ -17,41 +20,36 @@ namespace Settings {
 			setMxPlts(rawSettings.at("Max_Planets"));
 			getOreStages(rawSettings.at("Ore_Stages"));
 			getOreTiers(rawSettings.at("Ore_Tiers"));
-			setPltPopRand1Rng(false, rawSettings.at("Planet_Pop_Rand1_Min"));
-			setPltPopRand1Rng(true, rawSettings.at("Planet_Pop_Rand1_Max"));
-			setPltPopRand2Rng(false, rawSettings.at("Planet_Pop_Rand2_Min"));
-			setPltPopRand2Rng(true, rawSettings.at("Planet_Pop_Rand2_Max"));
-			setPltPopRand3Rng(false, rawSettings.at("Planet_Pop_Rand3_Min"));
-			setPltPopRand3Rng(true, rawSettings.at("Planet_Pop_Rand3_Max"));
-			setPltDefRandRng(rawSettings.at("Planet_Def_Rand_Max"));
-			setPltShdRandRng(rawSettings.at("Planet_Shd_Rand_Max"));
-			setPltSzRandRng(false, rawSettings.at("Planet_Size_Rand_Min"));
-			setPltSzRandRng(true, rawSettings.at("Planet_Size_Rand_Max"));
-			setPltEksRandRng(false, rawSettings.at("Planet_EKS_Range_Min"));
-			setPltEksRandRng(true, rawSettings.at("Planet_EKS_Range_Max"));
+			setPltPopRand1Rng(u::splitValToRng(rawSettings.at("Planet_Pop_Rand1_Rng"),"Int"));
+			setPltPopRand2Rng(u::splitValToRng(rawSettings.at("Planet_Pop_Rand2_Rng"), "Int"));
+			setPltPopRand3Rng(u::splitValToRng(rawSettings.at("Planet_Pop_Rand3_Rng"), "Int"));
+			setPltDefRandRng(u::splitValToRng(rawSettings.at("Planet_Def_Rnd_Rng"), "Int"));
+			setPltShdRandRng(u::splitValToRng(rawSettings.at("Planet_Shd_Rnd_Rng"), "Int"));
+			setPltSzRandRng(u::splitValToRng(rawSettings.at("Planet_Size_Rnd_Rng"), "Int"));
+			setPltEksRandRng(u::splitValToRng(rawSettings.at("Planet_EKS_Rnd_Rng"), "Int"));
 			setUnvStrtSysAmt(rawSettings.at("Unv_Starting_Systems"));
 			setMxABelts(rawSettings.at("Max_Asteroid_Belts"));
-			setABeltMxRoids(false, rawSettings.at("Min_Asteroids"));
-			setABeltMxRoids(true, rawSettings.at("Max_Asteroids"));
-			setABeltSzRnd(false, rawSettings.at("ABelt_Size_Rand_Min"));
-			setABeltSzRnd(true, rawSettings.at("ABelt_Size_Rand_Max"));
-			setRdSzRandRng(false, rawSettings.at("Asteroid_Size_Rand_Min"));
-			setRdSzRandRng(true, rawSettings.at("Asteroid_Size_Rand_Max"));
-			setRdSmRng(false, rawSettings.at("Asteroid_Small_Range_Min"));
-			setRdSmRng(true, rawSettings.at("Asteroid_Small_Range_Max"));
-			setRdMdRng(false, rawSettings.at("Asteroid_Medium_Range_Min"));
-			setRdMdRng(true, rawSettings.at("Asteroid_Medium_Range_Max"));
-			setRdLgRng(false, rawSettings.at("Asteroid_Large_Range_Min"));
-			setRdLgRng(true, rawSettings.at("Asteroid_Large_Range_Max"));
+			setABeltMxRoids(u::splitValToRng(rawSettings.at("Asteroids_Rng"), "Int"));
+			setABeltSzRnd(u::splitValToRng(rawSettings.at("ABelt_Size_Rnd_Rng"), "Int"));
+			setRdSzRandRng(u::splitValToRng(rawSettings.at("Asteroid_Size_Rnd_Rng"), "Int"));
+			setRdSmRng(u::splitValToRng(rawSettings.at("Asteroid_Small_Rng"), "Int"));
+			setRdMdRng(u::splitValToRng(rawSettings.at("Asteroid_Medium_Rng"), "Int"));
+			setRdLgRng(u::splitValToRng(rawSettings.at("Asteroid_Large_Rng"), "Int"));
+			setRdHgRng(u::splitValToRng(rawSettings.at("Asteroid_Huge_Rng"), "Int"));
 			setUnvExpRate(rawSettings.at("Unv_Exp_Rate"));
-			setHighSecRng(false, rawSettings.at("Sec_Rating_High_Min"));
-			setHighSecRng(true, rawSettings.at("Sec_Rating_High_Max"));
-			setMidSecRng(false, rawSettings.at("Sec_Rating_Mid_Min"));
-			setMidSecRng(true, rawSettings.at("Sec_Rating_Mid_Max"));
-			setLowSecRng(false, rawSettings.at("Sec_Rating_Low_Min"));
-			setLowSecRng(true, rawSettings.at("Sec_Rating_Low_Max"));
-			setNullSecRng(false, rawSettings.at("Sec_Rating_Null_Min"));
-			setNullSecRng(true, rawSettings.at("Sec_Rating_Null_Max"));
+			setHighSecRng(u::splitValToRng(rawSettings.at("Sec_Rating_High_Rng"), "Int"));
+			setMidSecRng(u::splitValToRng(rawSettings.at("Sec_Rating_Mid_Rng"), "Int"));
+			setLowSecRng(u::splitValToRng(rawSettings.at("Sec_Rating_Low_Rng"), "Int"));
+			setNullSecRng(u::splitValToRng(rawSettings.at("Sec_Rating_Null_Rng"), "Int"));
+			setOreStgRndRng(u::splitValToRng(rawSettings.at("Ore_Stage_Rnd_Rng"), "Int"));
+			setOreTrRndRng(u::splitValToRng(rawSettings.at("Ore_Tier_Rnd_Rng"), "Float"));
+			setMnClsRng(u::splitValToRng(rawSettings.at("Moon_CLS_Rng"), "Int"));
+			setDpoSmSzRng(u::splitValToRng(rawSettings.at("Deposit_Small_Size_Rng"), "Int"));
+			setDpoMdSzRng(u::splitValToRng(rawSettings.at("Deposit_Med_Size_Rng"), "Int"));
+			setDpoLgSzRng(u::splitValToRng(rawSettings.at("Deposit_Lrg_Size_Rng"), "Int"));
+			setDpoHgSzRng(u::splitValToRng(rawSettings.at("Deposit_Huge_Size_Rng"), "Int"));
+			setMnClsRndRng(u::splitValToRng(rawSettings.at("Moon_CLS_Rnd_Rng"), "Int"));
+			setMnAmtRndRng(u::splitValToRng(rawSettings.at("Moon_Amt_Rnd_Rng"), "Int"));
 		}
 		catch (std::out_of_range& const e) {
 			exit(EXIT_FAILURE);
@@ -165,68 +163,46 @@ namespace Settings {
 
 	//Process a single plt type's settings which are now stored in keys and vals vectors
 	pltTypeSettings processPltSettings(pltTypeSettings plts, string key, string val) {
-		if (key.find("EKS_Range_Min") != string::npos) { plts.setPltEksRng(false, stof(val)); }
-		else if (key.find("EKS_Range_Max") != string::npos) { plts.setPltEksRng(true, stof(val)); }
-		else if (key.find("Size_Range_Min") != string::npos) { plts.setPltSzRng(false, stoi(val)); }
-		else if (key.find("Size_Range_Max") != string::npos) { plts.setPltSzRng(true, stoi(val)); }
-		else if (key.find("Outlier_Range_Min") != string::npos) { plts.setPltOutlrRng(false, stof(val)); }
-		else if (key.find("Outlier_Range_Max") != string::npos) { plts.setPltOutlrRng(true, stof(val)); }
-		else if (key.find("Size_Rand_Min") != string::npos) { plts.setPltSzRndRng(false, stof(val)); }
-		else if (key.find("Size_Rand_Max") != string::npos) { plts.setPltSzRndRng(true, stof(val)); }
-		else if (key.find("Def_Max") != string::npos) {
-			if (val != "0") { plts.addPltDefRng(stof(val)); }
-		}
-		else if (key.find("Shd_Max") != string::npos) {
-			if (val != "0") { plts.addPltShdRng(stof(val)); }
-		}
-		else if (key.find("Moon_CLS_Vect") != string::npos) {
-			for (string sVal : splitVal(val)) {
-				plts.addPltMoonCls(stoi(sVal));
-			}
-		}
-		else if (key.find("Moon_Num_Vect") != string::npos) {
-			for (string sVal : splitVal(val)) {
-				plts.addPltMoonAmt(stoi(sVal));
-			}
-		}
+		if (key.find("EKS_Rng") != string::npos) { plts.setPltEksRng(u::splitValToRng(val,"Float")); }
+		else if (key.find("Size_Rng") != string::npos) { plts.setPltSzRng(u::splitValToRng(val,"Int")); }
+		else if (key.find("Outlier_Rng") != string::npos) { plts.setPltOutlrRng(u::splitValToRng(val,"Float")); }
+		else if (key.find("Size_Rnd_Rng") != string::npos) { plts.setPltSzRndRng(u::splitValToRng(val,"Float")); }
+		else if (key.find("Def_Max") != string::npos) { plts.addPltDefRng(stof(val)); }
+		else if (key.find("Shd_Max") != string::npos) { plts.addPltShdRng(stof(val)); }
+		else if (key.find("Moon_CLS_Rng") != string::npos) { plts.setPltMnCls(u::splitValToRng(val, "Int")); }
+		else if (key.find("Moon_CLS_Vect") != string::npos) { plts.setPltMnClsVect(u::splitValToInt(val)); }
+		else if (key.find("Moon_Num_Vect") != string::npos) { plts.setPltMnAmtVect(u::splitValToInt(val)); }
 
 		return plts;
 	}
 
 	//Process a single plt type's settings which are now stored in keys and vals vectors
 	roidStageSettings processRoidSettings(roidStageSettings roid, string key, string val) {
-		if (key.find("Multi_Rand_Min") != string::npos) { roid.setRoidOStgMulRnd(false, stof(val)); }
-		else if (key.find("Multi_Rand_Max") != string::npos) { roid.setRoidOStgMulRnd(true, stof(val)); }
+		if (key.find("Multi_Rnd_Rng") != string::npos) { roid.setRoidOStgMulRnd(u::splitValToRng(val,"Float")); }
 		else if (key.find("Size_Multi") != string::npos) { roid.setRoidStgMulti(stoi(val)); }
-		else if (key.find("Small_Min") != string::npos) { roid.setRoidSmRng(false, stoi(val)); }
-		else if (key.find("Small_Max") != string::npos) { roid.setRoidSmRng(true, stoi(val)); }
-		else if (key.find("Medium_Min") != string::npos) { roid.setRoidMdRng(false, stoi(val)); }
-		else if (key.find("Medium_Max") != string::npos) { roid.setRoidMdRng(true, stoi(val)); }
-		else if (key.find("Large_Min") != string::npos) { roid.setRoidLgRng(false, stoi(val)); }
-		else if (key.find("Large_Max") != string::npos) { roid.setRoidLgRng(true, stoi(val)); }
+		else if (key.find("Small_Rng") != string::npos) { roid.setRoidSmRng(u::splitValToRng(val,"Int")); }
+		else if (key.find("Medium_Rng") != string::npos) { roid.setRoidMdRng(u::splitValToRng(val,"Int")); }
+		else if (key.find("Large_Rng") != string::npos) { roid.setRoidLgRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Huge_Rng") != string::npos) { roid.setRoidHgRng(u::splitValToRng(val, "Int")); }
 
 		return roid;
 	}
 
 	oreTierSettings processOreTierSettings(oreTierSettings tier, string key, string val) {
-		if (key.find("High_Sec_Min") != string::npos) { tier.setHighRng(false, stof(val)); }
-		else if (key.find("High_Sec_Max") != string::npos) { tier.setHighRng(true, stof(val)); }
-		else if (key.find("Mid_Sec_Min") != string::npos) { tier.setMidRng(false, stof(val)); }
-		else if (key.find("Mid_Sec_Max") != string::npos) { tier.setMidRng(true, stof(val)); }
-		else if (key.find("Low_Sec_Min") != string::npos) { tier.setLowRng(false, stof(val)); }
-		else if (key.find("Low_Sec_Max") != string::npos) { tier.setLowRng(true, stof(val)); }
-		else if (key.find("Null_Sec_Min") != string::npos) { tier.setNullRng(false, stof(val)); }
-		else if (key.find("Null_Sec_Max") != string::npos) { tier.setNullRng(true, stof(val)); }
+		if (key.find("High_Sec_Rng") != string::npos) { tier.setHighRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Mid_Sec_Rng") != string::npos) { tier.setMidRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Low_Sec_Rng") != string::npos) { tier.setLowRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Null_Sec_Rng") != string::npos) { tier.setNullRng(u::splitValToRng(val, "Int")); }
 
 		return tier;
 	}
 
 	void setLogLevel(string val) { logLvl = stoi(val); }
 	void setPlyCXPBVal(string val) { plyCXPBVal = stoi(val); }
-	void getPltTyps(string val) { pltTypes = splitVal(val); }
-	void getDifficulties(string val) { gameDiffs = splitVal(val); }
-	void getOreStages(string val) { oreStages = splitVal(val); }
-	void getOreTiers(string val) { oreTiers = splitVal(val); }
+	void getPltTyps(string val) { pltTypes = u::splitValToStr(val); }
+	void getDifficulties(string val) { gameDiffs = u::splitValToStr(val); }
+	void getOreStages(string val) { oreStages = u::splitValToStr(val); }
+	void getOreTiers(string val) { oreTiers = u::splitValToStr(val); }
 	void setDifficulty(string val) { sGameDifficulty = val; }
 	void setPlyShdDmgMlt(string val) { shdDmgMultPly = stof(val); }
 	void setPlyArmDmgMlt(string val) { armDmgMultPly = stof(val); }
@@ -235,118 +211,40 @@ namespace Settings {
 	void setNPArmDmgMlt(string val) { armDmgMultNP = stof(val); }
 	void setNPHulDmgMlt(string val) { hulDmgMultNP = stof(val); }
 	void setScpYld(string val) { scpYldRt = stof(val); }
-	void setMisTypes(string val) { missClsTypes = splitVal(val); }
+	void setMisTypes(string val) { missClsTypes = u::splitValToStr(val); }
 	void setLSSpnRt(string val) { lSecSpawnRt = stof(val); }
 	void setMSSpnRt(string val) { mSecSpawnRt = stof(val); }
 	void setHSSpnRt(string val) { hSecSpawnRt = stof(val); }
 	void setNSSpnRt(string val) { nSecSpawnRt = stof(val); }
 	void setPlyCXPFac(string val) { plyCXPFactor = stof(val); }
 	void setNPCXPFac(string val) { npCXPFactor = stof(val); }
-
 	void setMxPlts(string val) { maxPlanets = stoi(val); }
-	void setPltPopRand1Rng(bool bIsMax, string val){
-		if (bIsMax) { pltPopRand1.fHigh = stof(val); }
-		else { pltPopRand1.fLow = stof(val); }
-	}
-	
-	void setPltPopRand2Rng(bool bIsMax, string val){
-		if (bIsMax) { pltPopRand2.fHigh = stof(val); }
-		else { pltPopRand2.fLow = stof(val); }
-	}
-	
-	void setPltPopRand3Rng(bool bIsMax, string val){
-		if (bIsMax) { pltPopRand3.fHigh = stof(val); }
-		else { pltPopRand3.fLow = stof(val); }
-	}
-	
-	void setPltDefRandRng(string val) { pltDefRand.fHigh = stof(val); }	
-	void setPltShdRandRng(string val) { pltShdRand.fHigh = stof(val); }
-	
-	void setPltSzRandRng(bool bIsMax, string val){
-		if (bIsMax) { pltSizeRand.iHigh = stoi(val); }
-		else { pltSizeRand.iLow = stoi(val); }
-	}
-	
-	void setPltEksRandRng(bool bIsMax, string val){
-		if (bIsMax) { pltEksRand.fHigh = stof(val); }
-		else { pltEksRand.fLow = stof(val); }
-	}
-
+	void setPltPopRand1Rng(Range rng) { pltPopRand1 = rng; }
+	void setPltPopRand2Rng(Range rng) { pltPopRand2 = rng; }
+	void setPltPopRand3Rng(Range rng) { pltPopRand3 = rng; }
+	void setPltDefRandRng(Range rng) { pltDefRand = rng; }
+	void setPltShdRandRng(Range rng) { pltShdRand = rng; }
+	void setPltSzRandRng(Range rng) { pltSizeRand = rng; }
+	void setPltEksRandRng(Range rng) { pltEksRand = rng; }
 	void setUnvStrtSysAmt(string val) { unvStartSystems = stoi(val); }
 	void setMxABelts(string val) { maxAsteroidBelts = stoi(val); }
-	void setABeltMxRoids(bool bIsMax, string val) {
-		if (bIsMax) { abltMaxAsteroids.iHigh = stoi(val); }
-		else { abltMaxAsteroids.iLow = stoi(val); }
-	}
-
-	void setABeltSzRnd(bool bIsMax, string val) {
-		if (bIsMax) { abltSizeRandRng.fHigh = stof(val); }
-		else { abltSizeRandRng.fLow = stof(val); }
-	}
-
-	extern void setRdSzRandRng(bool bIsMax, string val) {
-		if (bIsMax) { roidSizeRandRng.fHigh = stof(val); }
-		else { roidSizeRandRng.fLow = stof(val); }
-	}
-
-	extern void setRdSmRng(bool bIsMax, string val) {
-		if (bIsMax) { roidSmallRng.fHigh = stof(val); }
-		else { roidSmallRng.fLow = stof(val); }
-	}
-
-	extern void setRdMdRng(bool bIsMax, string val) {
-		if (bIsMax) { roidMedRng.fHigh = stof(val); }
-		else { roidMedRng.fLow = stof(val); }
-	}
-
-	extern void setRdLgRng(bool bIsMax, string val) {
-		if (bIsMax) { roidLargeRng.fHigh = stof(val); }
-		else { roidLargeRng.fLow = stof(val); }
-	}
-
-	void setHighSecRng(bool bIsMax, string val) {
-		if (bIsMax) { secRtHighRng.fHigh = stof(val); }
-		else { secRtHighRng.fLow = stof(val); }
-	}
-
-	void setMidSecRng(bool bIsMax, string val) {
-		if (bIsMax) { secRtMidRng.fHigh = stof(val); }
-		else { secRtMidRng.fLow = stof(val); }
-	}
-
-	void setLowSecRng(bool bIsMax, string val) {
-		if (bIsMax) { secRtLowRng.fHigh = stof(val); }
-		else { secRtLowRng.fLow = stof(val); }
-	}
-
-	void setNullSecRng(bool bIsMax, string val) {
-		if (bIsMax) { secRtNullRng.fHigh = stof(val); }
-		else { secRtNullRng.fLow = stof(val); }
-	}
-	
+	void setABeltMxRoids(Range rng) { abltMaxAsteroids = rng; }
+	void setABeltSzRnd(Range rng) { abltSizeRandRng = rng; }
+	void setRdSzRandRng(Range rng) { roidSizeRandRng = rng; }
+	void setRdSmRng(Range rng) { roidSmallRng = rng; }
+	void setRdMdRng(Range rng) { roidMedRng = rng; }
+	void setRdLgRng(Range rng) { roidLargeRng = rng; }
+	void setRdHgRng(Range rng) { roidHugeRng = rng; }
+	void setHighSecRng(Range rng) { secRtHighRng = rng; }
+	void setMidSecRng(Range rng) { secRtMidRng = rng; }
+	void setLowSecRng(Range rng) { secRtLowRng = rng; }
+	void setNullSecRng(Range rng) { secRtNullRng = rng; }
 	void setSMap(map<string, string> settingMap) {
 		rawSettings = settingMap;
-
 		loadSettings();
 	}
 
 	void setUnvExpRate(string val) { unvExpRate = stoi(val); }
-	vector<string> splitVal(string val) {		
-		vector<string> temp;
-		curPos = val.find(',');
-		
-		while (curPos != std::string::npos) {
-			temp.push_back(val.substr(prvPos, curPos - prvPos));
-			prvPos = curPos + 1;
-			curPos = val.find(',', prvPos);
-		}
-		
-		temp.push_back(val.substr(prvPos, curPos - prvPos));
-		prvPos = 0; //Reset for next call
-
-		return temp;
-	}
-
 	void printMods() {
 		cout << "Target Damage Modifiers" << endl;
 		cout << "Player:" << endl;
@@ -381,12 +279,12 @@ namespace Settings {
 
 	void diffSettings::setSetting(string key, string val) {
 		if (key.find("CXP_P_BaseVal") != string::npos) { dSCXPBVal = val; }
-		else if (key.find("P_Weapon_Shd_Dmg_Multi") != string::npos) { dSPWpnShdDmgMulti = val; }
-		else if (key.find("P_Weapon_Arm_Dmg_Multi") != string::npos) { dSPWpnArmDmgMulti = val; }
-		else if (key.find("P_Weapon_Hull_Dmg_Multi") != string::npos) { dSPWpnHulDmgMulti = val; }
-		else if (key.find("N_Weapon_Shd_Dmg_Multi") != string::npos) { dSNWpnShdDmgMulti = val; }
-		else if (key.find("N_Weapon_Arm_Dmg_Multi") != string::npos) { dSNWpnArmDmgMulti = val; }
-		else if (key.find("N_Weapon_Hull_Dmg_Multi") != string::npos) { dSNWpnHulDmgMulti = val; }
+		else if (key.find("P_Weapon_Shd_Dmg_Mod") != string::npos) { dSPWpnShdDmgMulti = val; }
+		else if (key.find("P_Weapon_Arm_Dmg_Mod") != string::npos) { dSPWpnArmDmgMulti = val; }
+		else if (key.find("P_Weapon_Hull_Dmg_Mod") != string::npos) { dSPWpnHulDmgMulti = val; }
+		else if (key.find("N_Weapon_Shd_Dmg_Mod") != string::npos) { dSNWpnShdDmgMulti = val; }
+		else if (key.find("N_Weapon_Arm_Dmg_Mod") != string::npos) { dSNWpnArmDmgMulti = val; }
+		else if (key.find("N_Weapon_Hull_Dmg_Mod") != string::npos) { dSNWpnHulDmgMulti = val; }
 		else if (key.find("Scrap_Yield") != string::npos) { dSScpYld = val; }
 		else if (key.find("HSec_Ship_SRate") != string::npos) { dSHSSpnRt = val; }
 		else if (key.find("MSec_Ship_SRate") != string::npos) { dSMSSpnRt = val; }
@@ -420,36 +318,22 @@ namespace Settings {
 	}
 
 	string pltTypeSettings::getSettingType() { return plSType; }
-
-	void pltTypeSettings::setPltEksRng(bool bIsMax, float val) {
-		if (bIsMax) { plEksRng.fHigh = val; }
-		else { plEksRng.fLow = val; }
-	}
-
+	void pltTypeSettings::setPltEksRng(Range rng) { plEksRng = rng; }
 	Range pltTypeSettings::getPltEksRng() { return plEksRng; }
-	void pltTypeSettings::setPltSzRng(bool bIsMax, int val) {
-		if (bIsMax) { plSizeRng.iHigh = val; }
-		else { plSizeRng.iLow = val; }
-	}
-
+	void pltTypeSettings::setPltSzRng(Range rng) { plSizeRng = rng; }
 	Range pltTypeSettings::getPltSzRng() { return plSizeRng; }
-	void pltTypeSettings::setPltOutlrRng(bool bIsMax, float val) {
-		if (bIsMax) { plOutlierRng.fHigh = val; }
-		else { plOutlierRng.fLow = val; }
-	}
-
+	void pltTypeSettings::setPltOutlrRng(Range rng) { plOutlierRng = rng; }
 	Range pltTypeSettings::getPltOutlrRng() { return plOutlierRng; }
-	void pltTypeSettings::setPltSzRndRng(bool bIsMax, float val) {
-		if (bIsMax) { plSizeRndRng.fHigh = val; }
-		else { plSizeRndRng.fLow = val; }
-	}
-
+	void pltTypeSettings::setPltSzRndRng(Range rng) { plSizeRndRng = rng; }
 	Range pltTypeSettings::getPltSzRndRng() { return plSizeRndRng; }
 	int pltTypeSettings::getPltMnClsSz() { return pltMoonClsVect.size(); }
 	int pltTypeSettings::getPltMnAmtSz() { return pltMoonAmtVect.size(); }
 	int pltTypeSettings::getPltMnCls(int pos) { return pltMoonClsVect.at(pos); }
 	int pltTypeSettings::getPltMnAmt(int pos) { return pltMoonAmtVect.at(pos); }
 	Range pltTypeSettings::getPltMnClsRng() { return pltMoonCLS; }
+	void pltTypeSettings::setPltMnCls(Range rng) { pltMoonCLS = rng; }
+	void pltTypeSettings::setPltMnClsVect(vector<int> vect) { pltMoonClsVect = vect; }
+	void pltTypeSettings::setPltMnAmtVect(vector<int> vect) { pltMoonAmtVect = vect; }
 	void pltTypeSettings::addPltDefRng(float maxVal) {
 		plDefRngs.push_back(Range());
 		plDefRngs.at(plDefRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
@@ -458,14 +342,6 @@ namespace Settings {
 	void pltTypeSettings::addPltShdRng(float maxVal){
 		plShdRngs.push_back(Range());
 		plShdRngs.at(plShdRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
-	}
-
-	void pltTypeSettings::addPltMoonCls(int val){
-		pltMoonClsVect.push_back(val);
-	}
-
-	void pltTypeSettings::addPltMoonAmt(int val){
-		pltMoonAmtVect.push_back(val);
 	}
 
 	float pltTypeSettings::getPltDefRng(int pos) { return plDefRngs.at(pos).fHigh; }
@@ -480,26 +356,11 @@ namespace Settings {
 		roidStageI = stoi(stage);
 	}
 
-	void roidStageSettings::setRoidOStgMulRnd(bool bIsMax, float val) {
-		if (bIsMax) { roidOStgMulRnd.fHigh = val; }
-		else { roidOStgMulRnd.fLow = val; }
-	}
-
-	void roidStageSettings::setRoidSmRng(bool bIsMax, int val) {
-		if (bIsMax) { roidSmallRng.iHigh = val; }
-		else { roidSmallRng.iLow = val; }
-	}
-
-	void roidStageSettings::setRoidMdRng(bool bIsMax, int val) {
-		if (bIsMax) { roidMedRng.iHigh = val; }
-		else { roidMedRng.iLow = val; }
-	}
-
-	void roidStageSettings::setRoidLgRng(bool bIsMax, int val){
-		if (bIsMax) { roidLargeRng.iHigh = val; }
-		else { roidLargeRng.iLow = val; }
-	}
-
+	void roidStageSettings::setRoidOStgMulRnd(Range rng) { roidOStgMulRnd = rng; }
+	void roidStageSettings::setRoidSmRng(Range rng) { roidSmallRng = rng; }
+	void roidStageSettings::setRoidMdRng(Range rng) { roidMedRng = rng; }
+	void roidStageSettings::setRoidLgRng(Range rng) { roidLargeRng = rng; }
+	void roidStageSettings::setRoidHgRng(Range rng) { roidHugeRng = rng; }
 	string roidStageSettings::getStage() { return roidStage; }
 	int roidStageSettings::getStageI() { return roidStageI; }
 	void roidStageSettings::setRoidStgMulti(float val) { roidStgMulti = val; }
@@ -508,6 +369,7 @@ namespace Settings {
 	Range roidStageSettings::getRoidSmRng() { return roidSmallRng; }
 	Range roidStageSettings::getRoidMdRng() { return roidMedRng; }
 	Range roidStageSettings::getRoidLgRng() { return roidLargeRng; }
+	Range roidStageSettings::getRoidHgRng() { return roidHugeRng; }
 
 
 	//oreTierSettings Functions
@@ -516,26 +378,10 @@ namespace Settings {
 		tierVal = stoi(tier);
 	}
 
-	void oreTierSettings::setHighRng(bool bIsMax, float val) {
-		if (bIsMax) { tierHighRng.fHigh = val; }
-		else { tierHighRng.fLow = val; }
-	}
-
-	void oreTierSettings::setMidRng(bool bIsMax, float val) {
-		if (bIsMax) { tierMidRng.fHigh = val; }
-		else { tierMidRng.fLow = val; }
-	}
-
-	void oreTierSettings::setLowRng(bool bIsMax, float val) {
-		if (bIsMax) { tierLowRng.fHigh = val; }
-		else { tierLowRng.fLow = val; }
-	}
-
-	void oreTierSettings::setNullRng(bool bIsMax, float val) {
-		if (bIsMax) { tierNullRng.fHigh = val; }
-		else { tierNullRng.fLow = val; }
-	}
-
+	void oreTierSettings::setHighRng(Range rng) { tierHighRng = rng; }
+	void oreTierSettings::setMidRng(Range rng) { tierMidRng = rng; }
+	void oreTierSettings::setLowRng(Range rng) { tierLowRng = rng; }
+	void oreTierSettings::setNullRng(Range rng) { tierNullRng = rng; }
 	string oreTierSettings::getTier() { return tierName; }
 	int oreTierSettings::getTierVal() { return tierVal; }
 	Range oreTierSettings::getHighRng() { return tierHighRng; }
@@ -544,9 +390,72 @@ namespace Settings {
 	Range oreTierSettings::getNullRng() { return tierNullRng; }
 
 
-	//new functions
+	//moonClsSettings Functions
+	moonClsSettings::moonClsSettings(string cls){
+		mnCls = "CLS_" + cls;
+		mnClsInt = stoi(cls);
+	}
 
-	//New members
+	void moonClsSettings::setMnDpSmSpnRng(Range rng) { mnDepoSmSpnRng = rng; }
+	void moonClsSettings::setMnDpMdSpnRng(Range rng) { mnDepoMdSpnRng = rng; }
+	void moonClsSettings::setMnDpLgSpnRng(Range rng) { mnDepoLgSpnRng = rng; }
+	void moonClsSettings::setMnDpHgSpnRng(Range rng) { mnDepoHgSpnRng = rng; }
+	string moonClsSettings::getMnCls() { return mnCls; }
+	int moonClsSettings::getMnClsInt() { return mnClsInt; }
+	Range moonClsSettings::getMnDpSmSpnRng() { return mnDepoSmSpnRng; }
+	Range moonClsSettings::getMnDpMdSpnRng() { return mnDepoMdSpnRng; }
+	Range moonClsSettings::getMnDpLgSpnRng() { return mnDepoLgSpnRng; }
+	Range moonClsSettings::getMnDpHgSpnRng() { return mnDepoHgSpnRng; }
+
+
+	//New Functions
+	void setOreStgRndRng(Range rng) { oreStgRnd = rng; }
+	void setOreTrRndRng(Range rng) { oreTrRnd = rng; }
+	void setMnClsRng(Range rng) { mnCls = rng; }	
+	void setDpoSmSzRng(Range rng) { dpoSmSz = rng; }
+	void setDpoMdSzRng(Range rng) { dpoMdSz = rng; }
+	void setDpoLgSzRng(Range rng) { dpoLgSz = rng; }
+	void setDpoHgSzRng(Range rng) { dpoHgSz = rng; }
+	void setMnClsRndRng(Range rng) { mnClsRnd = rng; }
+	void setMnAmtRndRng(Range rng) { mnAmtRnd = rng; }
+	
+	void loadMnClsSettings() {
+		//Prepare pltTypSettings if not already
+		if (gMnClsSettings.size() < 1) {
+			for (i1 = 1; i1 <= mnCls.iHigh; i1++) {
+				gMnClsSettings.push_back(moonClsSettings(to_string(i1)));
+			}
+		}
+
+		//Diff based settings - Do these after non-diff settings are loaded
+		for (moonClsSettings& mcsSetting : gMnClsSettings) {
+			for (auto mapEl : rawSettings) {
+				string tmpStr = mapEl.first;
+
+				if (tmpStr.find(mcsSetting.getMnCls()) != string::npos) {
+					mcsSetting = processMnClsSettings(mcsSetting, mapEl.first, mapEl.second);
+				}
+			}
+		}
+	}
+
+	moonClsSettings processMnClsSettings(moonClsSettings mcs, string key, string val) {
+		if (key.find("Small_Depos_Rnd") != string::npos) { mcs.setMnDpSmSpnRng(u::splitValToRng(val,"Int")); }
+		else if (key.find("Med_Depos_Rnd") != string::npos) { mcs.setMnDpMdSpnRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Lrg_Depos_Rnd") != string::npos) { mcs.setMnDpLgSpnRng(u::splitValToRng(val, "Int")); }
+		else if (key.find("Huge_Depos_Rnd") != string::npos) { mcs.setMnDpHgSpnRng(u::splitValToRng(val, "Int")); }
+	}
+
+	//New Members
+	Range oreStgRnd;
+	Range oreTrRnd;
+	Range mnCls;
+	Range dpoSmSz;
+	Range dpoMdSz;
+	Range dpoLgSz;
+	Range dpoHgSz;
+	Range mnClsRnd;
+	Range mnAmtRnd;
 	
 
 
@@ -596,20 +505,22 @@ namespace Settings {
 	Range roidSmallRng; //Random vals which correspond to a small asteroid
 	Range roidMedRng; //Random vals which correspond to a medium asteroid
 	Range roidLargeRng; //Random vals which correspond to a large asteroid
+	Range roidHugeRng; //Random vals which correspond to a huge asteroid
 	Range secRtHighRng; //High security rating range
 	Range secRtMidRng; //Mid security rating range
 	Range secRtLowRng; //Low security rating range
 	Range secRtNullRng; //Null security rating range
 
 	//Reference Settings
-	vector<diffSettings> gDiffSettings;
-	vector<pltTypeSettings> gPltTypSettings;
+	vector<diffSettings> gDiffSettings; //Stores all of the data related to specific game difficulties
+	vector<pltTypeSettings> gPltTypSettings; //Stores all of the data related to specific planet types
 	vector<roidStageSettings> gRoidStgSettings; //Stores all of the data related to specific ore/asteroid stages
 	vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
+	vector<moonClsSettings> gMnClsSettings; //Stores all of the data related to specific moon classes
 							
 	//Misc
 	map<string, string> rawSettings, rawSettingsTemp;
-	int curPos, prvPos;
+	int i1;
 	map<string, string>::iterator itr;
 	vector<string> keys, vals;	
 }

@@ -34,7 +34,7 @@ void Universe::createPlSystems() {
 	for (int i1 = 0; i1 < setting::unvStartSystems; i1++) {				
 		sysNmEl = u::getIRand(0, uSysNames.size() - 1);
 		
-		sec = u::getFRand(0.45f, 1.0f);
+		sec = u::getFRand(0.45f, 1.0f); //Non-setting vals for now for testing the system plus more has to be built out to make this function properly
 
 		curSysName = uSysNames.at(sysNmEl);
 		addSystem(curSysName);

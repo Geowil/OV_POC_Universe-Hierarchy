@@ -20,6 +20,7 @@ namespace Settings {
 	class pltTypeSettings;
 	class roidStageSettings;
 	class oreTierSettings;
+	class moonClsSettings;
 
 	extern void loadSettings();
 	extern void loadDiffSettings();
@@ -50,26 +51,27 @@ namespace Settings {
 	extern void setPlyCXPFac(string val);
 	extern void setNPCXPFac(string val);
 	extern void setMxPlts(string val);
-	extern void setPltPopRand1Rng(bool bIsMax, string val);
-	extern void setPltPopRand2Rng(bool bIsMax, string val);
-	extern void setPltPopRand3Rng(bool bIsMax, string val);
-	extern void setPltDefRandRng(string val);
-	extern void setPltShdRandRng(string val);
-	extern void setPltSzRandRng(bool bIsMax, string val);
-	extern void setPltEksRandRng(bool bIsMax, string val);
+	extern void setPltPopRand1Rng(Range rng);
+	extern void setPltPopRand2Rng(Range rng);
+	extern void setPltPopRand3Rng(Range rng);
+	extern void setPltDefRandRng(Range rng);
+	extern void setPltShdRandRng(Range rng);
+	extern void setPltSzRandRng(Range rng);
+	extern void setPltEksRandRng(Range rng);
 	extern void setUnvStrtSysAmt(string val);
 	extern void setMxABelts(string val);
-	extern void setABeltMxRoids(bool bIsMax, string val);
-	extern void setABeltSzRnd(bool bIsMax, string val);
-	extern void setRdSzRandRng(bool bIsMax, string val);
-	extern void setRdSmRng(bool bIsMax, string val);
-	extern void setRdMdRng(bool bIsMax, string val);
-	extern void setRdLgRng(bool bIsMax, string val);
+	extern void setABeltMxRoids(Range rng);
+	extern void setABeltSzRnd(Range rng);
+	extern void setRdSzRandRng(Range rng);
+	extern void setRdSmRng(Range rng);
+	extern void setRdMdRng(Range rng);
+	extern void setRdLgRng(Range rng);
+	extern void setRdHgRng(Range rng);
 	extern void setUnvExpRate(string val);
-	extern void setHighSecRng(bool bIsMax, string val);
-	extern void setMidSecRng(bool bIsMax, string val);
-	extern void setLowSecRng(bool bIsMax, string val);
-	extern void setNullSecRng(bool bIsMax, string val);
+	extern void setHighSecRng(Range rng);
+	extern void setMidSecRng(Range rng);
+	extern void setLowSecRng(Range rng);
+	extern void setNullSecRng(Range rng);
 
 	extern void getDifficulties(string val);
 	extern void getPltTyps(string val);
@@ -81,68 +83,95 @@ namespace Settings {
 	extern void printMods();
 
 	
-	
+	//New Functions
+	extern void setOreStgRndRng(Range rng);
+	extern void setOreTrRndRng(Range rng);
+	extern void setMnClsRng(Range rng);
+	extern void setDpoSmSzRng(Range rng);
+	extern void setDpoMdSzRng(Range rng);
+	extern void setDpoLgSzRng(Range rng);
+	extern void setDpoHgSzRng(Range rng);
+	extern void setMnClsRndRng(Range rng);
+	extern void setMnAmtRndRng(Range rng);
+	extern void loadMnClsSettings();
+	extern moonClsSettings processMnClsSettings(moonClsSettings mcs, string key, string val);
+
+
+	//New Members
+	extern Range oreStgRnd;
+	extern Range oreTrRnd;
+	extern Range mnCls;
+	extern Range dpoSmSz;
+	extern Range dpoMdSz;
+	extern Range dpoLgSz;
+	extern Range dpoHgSz;
+	extern Range mnClsRnd;
+	extern Range mnAmtRnd;
+	extern vector<moonClsSettings> gMnClsSettings;
+
+
 
 	//Int Settings
 	extern int logLvl;
-	extern int plyCXPBVal; //Base value to determine CXP to next level for player
-	extern int maxPlanets; //Max number of planets in a system
-	extern int unvStartSystems; //Number of starting systems
-	extern int maxAsteroidBelts; //Max number of ABelts per planet
-	extern int unvExpRate; //Rate, in number of turns, before the universe will start expanding at start of game
+	extern int plyCXPBVal;
+	extern int maxPlanets;
+	extern int unvStartSystems;
+	extern int maxAsteroidBelts;
+	extern int unvExpRate;
 
 	//Float Settings
-	extern float shdDmgMultPly; //Shield Damage Multiplier - For Player
-	extern float armDmgMultPly; //Armor Damage Multiplier - For Player
-	extern float hulDmgMultPly; //Hull Damage Multiplier - For Player
-	extern float shdDmgMultNP; //Shield Damage Multiplier - For Non-Player
-	extern float armDmgMultNP; //Armor Damage Multiplier - For Non-Player
-	extern float hulDmgMultNP; //Hull Damage Multiplier - For Non-Player
-	extern float scpYldRt; //Scrap yield rate; the chance to find salvage after destroying a ship
-	extern float lSecSpawnRt; //Low Sec spawn rate for ships; non-TL
-	extern float mSecSpawnRt; //Med Sec spawn rate for ships
-	extern float hSecSpawnRt; //High Sec spawn rate for ships
-	extern float nSecSpawnRt; //Null Sec spawn rate for ships
-	extern float plyCXPFactor; //Factor used to determine CXP to next level for player
-	extern float npCXPFactor; //Factor used to determine the CXP given to the player for destroying and enemy
+	extern float shdDmgMultPly;
+	extern float armDmgMultPly;
+	extern float hulDmgMultPly;
+	extern float shdDmgMultNP;
+	extern float armDmgMultNP;
+	extern float hulDmgMultNP;
+	extern float scpYldRt;
+	extern float lSecSpawnRt;
+	extern float mSecSpawnRt;
+	extern float hSecSpawnRt;
+	extern float nSecSpawnRt;
+	extern float plyCXPFactor;
+	extern float npCXPFactor;
 
 	//String Settings
-	extern vector<string> gameDiffs; //Game Difficulties
-	extern vector<string> missClsTypes; //Missile Class Types
-	extern vector<string> pltTypes; //Types of Planets (classes, 0-5 by default)
-	extern vector<string> oreStages; //Types of ore stages
-	extern vector<string> oreTiers; //Types of ore tiers
-	extern string sGameDifficulty; //Selected game difficulty
+	extern vector<string> gameDiffs;
+	extern vector<string> missClsTypes;
+	extern vector<string> pltTypes;
+	extern vector<string> oreStages;
+	extern vector<string> oreTiers;
+	extern string sGameDifficulty;
 
 	//Range Settings
-	extern Range pltPopRand1; //Range used to calculate planet population
-	extern Range pltPopRand2; //Range used to calculate planet population
-	extern Range pltPopRand3; //Range used to calculate planet population
-	extern Range pltDefRand; //Sets the range used in calculating planetary defense installations
-	extern Range pltShdRand; //Sets the range used in calculating plaentary shield installations
-	extern Range pltSizeRand; //Sets the range used in determining the size of a planet
-	extern Range pltEksRand; //Sets the range used in determining the eks/size of a planet
-	extern Range abltMaxAsteroids; //Sets the min and max number of asteroids per belt
-	extern Range abltSizeRandRng; //Sets the min and max random range for asteroid belt size
-	extern Range roidSizeRandRng; //Sets the min and max range for asteroid size calculation
-	extern Range roidSmallRng; //Random vals which correspond to a small asteroid
-	extern Range roidMedRng; //Random vals which correspond to a medium asteroid
-	extern Range roidLargeRng; //Random vals which correspond to a large asteroid
-	extern Range secRtHighRng; //High security rating range
-	extern Range secRtMidRng; //Mid security rating range
-	extern Range secRtLowRng; //Low security rating range
-	extern Range secRtNullRng; //Null security rating range
+	extern Range pltPopRand1; 
+	extern Range pltPopRand2; 
+	extern Range pltPopRand3; 
+	extern Range pltDefRand; 
+	extern Range pltShdRand; 
+	extern Range pltSizeRand; 
+	extern Range pltEksRand; 
+	extern Range abltMaxAsteroids;
+	extern Range abltSizeRandRng;
+	extern Range roidSizeRandRng; 
+	extern Range roidSmallRng;
+	extern Range roidMedRng;
+	extern Range roidLargeRng;
+	extern Range roidHugeRng;
+	extern Range secRtHighRng;
+	extern Range secRtMidRng;
+	extern Range secRtLowRng;
+	extern Range secRtNullRng;
 
 
 	//Reference Settings
-	extern vector<diffSettings> gDiffSettings; //Stores all of the data related to setting difficulty-specific values
-	extern vector<pltTypeSettings> gPltTypSettings; //Stores all of the data related to specific planet type settings
-	extern vector<roidStageSettings> gRoidStgSettings; //Stores all of the data related to specific ore/asteroid stages
-	extern vector<oreTierSettings> gOreTierSettings; //Stores all of the data related to specific ore tiers
+	extern vector<diffSettings> gDiffSettings;
+	extern vector<pltTypeSettings> gPltTypSettings;
+	extern vector<roidStageSettings> gRoidStgSettings;
+	extern vector<oreTierSettings> gOreTierSettings;
 
 	//Misc - used to process setting data
 	extern map<string, string> rawSettings, rawSettingsTemp;
-	extern int curPos, prvPos;
+	extern int i1;
 	extern map<string, string>::iterator itr;
 	extern map<string, string> plSettings;
 	extern vector<string> keys, vals;
@@ -198,10 +227,8 @@ public:
 	string getSettingType();
 	//int getPltType();
 
-	void addPltDefRng(float maxVal);
-	void addPltShdRng(float maxVal);
-	void addPltMoonCls(int val);
-	void addPltMoonAmt(int val);
+	void addPltDefRng(float val);
+	void addPltShdRng(float val);
 
 	float getPltDefRng(int pos);
 	float getPltShdRng(int pos);
@@ -209,16 +236,16 @@ public:
 	int getPltDefRngSz();
 	int getPltShdRngSz();
 
-	void setPltEksRng(bool bIsMax, float val);
+	void setPltEksRng(Range rng);
 	Range getPltEksRng();
 
-	void setPltSzRng(bool bIsMax, int val);
+	void setPltSzRng(Range rng);
 	Range getPltSzRng();
 
-	void setPltOutlrRng(bool bIsMax, float val);
+	void setPltOutlrRng(Range rng);
 	Range getPltOutlrRng();
 
-	void setPltSzRndRng(bool bIsMax, float val);
+	void setPltSzRndRng(Range rng);
 	Range getPltSzRndRng();
 
 	int getPltMnClsSz();
@@ -227,6 +254,10 @@ public:
 	int getPltMnAmt(int pos);
 
 	Range getPltMnClsRng();
+
+	void setPltMnCls(Range rng);
+	void setPltMnClsVect(vector<int> vect);
+	void setPltMnAmtVect(vector<int> vect);
 
 private:
 	string plSType;
@@ -249,18 +280,20 @@ public:
 
 	string getStage();
 	int getStageI();
-	void setRoidOStgMulRnd(bool bIsMax, float val);
+	void setRoidOStgMulRnd(Range rng);
 	void setRoidStgMulti(float val);
 
-	void setRoidSmRng(bool bIsMax, int val);
-	void setRoidMdRng(bool bIsMax, int val);
-	void setRoidLgRng(bool bIsMax, int val);
+	void setRoidSmRng(Range rng);
+	void setRoidMdRng(Range rng);
+	void setRoidLgRng(Range rng);
+	void setRoidHgRng(Range rng);
 
 	Range getRoidOStgMulRnd();
 	float getRoidStgMulti();
 	Range getRoidSmRng();
 	Range getRoidMdRng();
 	Range getRoidLgRng();
+	Range getRoidHgRng();
 
 private:
 	string roidStage;
@@ -273,6 +306,7 @@ private:
 	Range roidSmallRng;
 	Range roidMedRng;
 	Range roidLargeRng;
+	Range roidHugeRng;
 
 };
 
@@ -280,10 +314,10 @@ class Settings::oreTierSettings {
 public:
 	oreTierSettings(string tier);
 
-	void setHighRng(bool bIsMax, float val);
-	void setMidRng(bool bIsMax, float val);
-	void setLowRng(bool bIsMax, float val);
-	void setNullRng(bool bIsMax, float val);
+	void setHighRng(Range rng);
+	void setMidRng(Range rng);
+	void setLowRng(Range rng);
+	void setNullRng(Range rng);
 
 	string getTier();
 	int getTierVal();
@@ -300,6 +334,34 @@ private:
 	Range tierMidRng;
 	Range tierLowRng;
 	Range tierNullRng;
+};
+
+class Settings::moonClsSettings {
+public:
+	moonClsSettings(string cls);
+
+	void setMnDpSmSpnRng(Range rng);
+	void setMnDpMdSpnRng(Range rng);
+	void setMnDpLgSpnRng(Range rng);
+	void setMnDpHgSpnRng(Range rng);
+
+	string getMnCls();
+	int getMnClsInt();
+	Range getMnDpSmSpnRng();
+	Range getMnDpMdSpnRng();
+	Range getMnDpLgSpnRng();
+	Range getMnDpHgSpnRng();
+
+
+private:
+	string mnCls;
+	int mnClsInt;
+
+	Range mnDepoSmSpnRng;
+	Range mnDepoMdSpnRng;
+	Range mnDepoLgSpnRng;
+	Range mnDepoHgSpnRng;
+
 };
 
 
