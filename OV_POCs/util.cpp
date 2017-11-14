@@ -138,8 +138,8 @@ namespace Util {
 		//Do this here once instead of each time below
 		if (tempStr.size() != 2) {
 			createBInfo("Err", __FILE__, to_string(__LINE__), __DATE__, __TIME__, "Err004", "String passed to splitValToRng does not have two values", "./OV_Log.txt");
-		}
-		
+		}		
+
 		if (typ == "Int") {
 			if (tempStr.size() == 2) {
 				tempRng.iLow = stoi(tempStr.at(0));

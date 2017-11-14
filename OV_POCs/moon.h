@@ -5,14 +5,24 @@
 #include <vector>
 #include "object.h"
 #include "resource.h"
+#include "settings.h"
+#include "dataStructs.h"
 
 using std::string;
 using std::vector;
+
+namespace setting = Settings;
 
 class Moon : public Object{
 public:
 	Moon();
 	Moon(string name);
+
+	void setupMoon(float eks, float sec);
+	void getOre(string tier, string stage);
+	void procOreDepo1(float sec, string dSz);
+	void procOreDepo2(setting::oreTierSettings tier, string depoSz);
+	void procOreDepo3(setting::oreTierSettings tier, setting::roidStageSettings oreStg);
 
 	void addResourceDeposit(Resource oreDeop);
 	void updateDeposite(int pos, string op, float newamt);
@@ -22,6 +32,13 @@ public:
 
 private:
 	vector<Resource> mOreDeposites;
+	int mnClsRand, numOfSmDepos, numOfMdDepos, numOfLgDepos, numOfHgDepos, oreStage;
+	int i1, oreEle;
+
+	float baseDepoSz,baseOreSz,tempDepoSz,tempOreSz,totalDepoSz,totalOreSz, oreTier;
+	vector<Resource> tempResVec; //Temp vector storage for processing
+	vector<strcResc> strRescs; //Vector to store the struct representation data
+
 };
 #endif
 

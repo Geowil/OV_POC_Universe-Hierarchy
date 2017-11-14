@@ -10,16 +10,15 @@ planetarySystem::planetarySystem() {}
 planetarySystem::planetarySystem(string sysName) { oName = sysName; }
 planetarySystem::planetarySystem(string sysName, float sec) {
 	oName = sysName;
-	plsSec = sec;
+	oSecLvl = sec;
 }
 
 planetarySystem::planetarySystem(int id, string sysName, float sec) {
 	oID = id;
 	oName = sysName;
-	plsSec = sec;
+	oSecLvl = sec;
 }
 
-float planetarySystem::getSecRating() { return plsSec; }
 void planetarySystem::createPlanets() {
 	int numOfPlanets = u::getIRand(1, setting::maxPlanets);
 
@@ -27,7 +26,7 @@ void planetarySystem::createPlanets() {
 		string plName;
 
 		plName = oName + " " + rNumerals[i1];
-		plsPlanets.push_back(Planet(plName,plsSec));
+		plsPlanets.push_back(Planet(plName, oSecLvl));
 	}
 
 	generatePlanets();
@@ -52,7 +51,6 @@ void planetarySystem::modifyPlanet(Planet pl) {
 
 vector<Planet> planetarySystem::getPlanets() { return plsPlanets; }
 Planet planetarySystem::getPlanet(int index) { return plsPlanets.at(index); }
-void planetarySystem::updateSecRating(float sec, string operation) { plsSec = u::updateVal(operation, sec, plsSec); }
 void planetarySystem::generatePlanets() {
 	//Iterate through each planet in plsSystem plsPlanets vector and set up values for each planet		
 	for (Planet& plt : plsPlanets) {
@@ -72,7 +70,7 @@ void planetarySystem::generatePlanets() {
 		//Now, cycle through each planet type setting in settings vector and apply the conditions based on the values in the appropriate instance
 		for (setting::pltTypeSettings plTSet : setting::gPltTypSettings) {
 			//Check if EKS value falls within the correct range
-			if (pERand2 >= plTSet.getPltEksRng().fLow && (pERand2 <= plTSet.getPltEksRng().fHigh || plTSet.getPltEksRng().fHigh == 0)) {
+			if (pERand2 >= plTSet.getPltEksRng().fLow && pERand2 <= plTSet.getPltEksRng().fHigh) {
 				//As the current eks random falls within the current type setting, set up the planet using this type setting's values
 				//Continue while this planet has not been confirmed generated
 				while (!bPPGen2) {
@@ -139,7 +137,7 @@ Planet planetarySystem::addShields(Planet plt) {
 
 int planetarySystem::getDefenses(float rand, float eks) {
 	for (setting::pltTypeSettings plTSet : setting::gPltTypSettings) {
-		if (eks >= plTSet.getPltEksRng().fLow && (eks <= plTSet.getPltEksRng().fHigh || plTSet.getPltEksRng().fHigh == 0)) {
+		if (eks >= plTSet.getPltEksRng().fLow && eks <= plTSet.getPltEksRng().fHigh) {
 			for (i1 = 0; i1 < plTSet.getPltDefRngSz() - 1; i1++) {
 				if (i1 == 0 && (rand >= 0.1f && rand <= plTSet.getPltDefRng(i1))) {
 					return i1; //Use iterator for num of defs
@@ -154,7 +152,7 @@ int planetarySystem::getDefenses(float rand, float eks) {
 
 int planetarySystem::getShields(float rand, float eks) {
 	for (setting::pltTypeSettings plTSet : setting::gPltTypSettings) {
-		if (eks >= plTSet.getPltEksRng().fLow && (eks <= plTSet.getPltEksRng().fHigh || plTSet.getPltEksRng().fHigh == 0)) {
+		if (eks >= plTSet.getPltEksRng().fLow && eks <= plTSet.getPltEksRng().fHigh) {
 			for (i1 = 0; i1 < plTSet.getPltShdRngSz() - 1; i1++) {
 				if (i1 == 0 && (rand >= 0.1f && rand <= plTSet.getPltShdRng(i1))) {
 					return i1; //Use iterator for num of defs

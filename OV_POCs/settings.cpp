@@ -336,12 +336,12 @@ namespace Settings {
 	void pltTypeSettings::setPltMnAmtVect(vector<int> vect) { pltMoonAmtVect = vect; }
 	void pltTypeSettings::addPltDefRng(float maxVal) {
 		plDefRngs.push_back(Range());
-		plDefRngs.at(plDefRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
+		plDefRngs.back().fHigh = maxVal; //Set fHigh for new Range element
 	}
 	
 	void pltTypeSettings::addPltShdRng(float maxVal){
 		plShdRngs.push_back(Range());
-		plShdRngs.at(plShdRngs.size() - 1).fHigh = maxVal; //Set fHigh for new Range element
+		plShdRngs.back().fHigh = maxVal; //Set fHigh for new Range element
 	}
 
 	float pltTypeSettings::getPltDefRng(int pos) { return plDefRngs.at(pos).fHigh; }
@@ -392,7 +392,7 @@ namespace Settings {
 
 	//moonClsSettings Functions
 	moonClsSettings::moonClsSettings(string cls){
-		mnCls = "CLS_" + cls;
+		mnCls = "CLS " + cls;
 		mnClsInt = stoi(cls);
 	}
 
@@ -447,17 +447,7 @@ namespace Settings {
 	}
 
 	//New Members
-	Range oreStgRnd;
-	Range oreTrRnd;
-	Range mnCls;
-	Range dpoSmSz;
-	Range dpoMdSz;
-	Range dpoLgSz;
-	Range dpoHgSz;
-	Range mnClsRnd;
-	Range mnAmtRnd;
 	
-
 
 	//Namespace Members
 	//Int Settings
@@ -510,6 +500,15 @@ namespace Settings {
 	Range secRtMidRng; //Mid security rating range
 	Range secRtLowRng; //Low security rating range
 	Range secRtNullRng; //Null security rating range
+	Range oreStgRnd; //Ore stage random range
+	Range oreTrRnd; //Ore tier random range
+	Range mnCls; //Min/Max moon class
+	Range dpoSmSz; //Small deposit size range
+	Range dpoMdSz; //Medium deposit size range
+	Range dpoLgSz; //Large deposit size range
+	Range dpoHgSz; //Huge deposit size range
+	Range mnClsRnd; //Moon class random range
+	Range mnAmtRnd; //Num of moons range range
 
 	//Reference Settings
 	vector<diffSettings> gDiffSettings; //Stores all of the data related to specific game difficulties

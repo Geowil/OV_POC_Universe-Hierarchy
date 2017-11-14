@@ -54,6 +54,7 @@ public:
 
 	void createMoons();
 	void addMoon(string name); //Load a saved asteroid belt
+	void setupMoonData();
 	void modifyMoon(Moon moon);
 	vector<Moon> getMoons();
 	Moon getMoon(int index);
@@ -75,22 +76,17 @@ public:
 	void setSLevel(float slvl);
 	float getSLevel();
 
+	void getTrailer(string pop);
+
 	
 							
 private:
-
-	string plName; //planet name
-	string plDispo; //Planet Disposition
-	string plAffil; //Planet Affiliation
-	string plRace;
 	float pEKS; //planet enhanced kardasev scale value
 	float pSize; //planet size, determines the total population possible
 	long long int pPop, pMPop; //planet population/max population
 	bool bIsPOwned; //bool: is this planet owned by the player?
 	bool bIsDest; //bool: is this planet destroyed (has it been attacked and laid barren)?
 	string pStatus; //Planet status, for battle processing
-
-	float plSecLvl; //Store this value from system for asteroid creation
 
 	string name;
 	int ramount;
@@ -104,13 +100,16 @@ private:
 	string trailer, sStorage, sPPop, sPMPop; //Strings for simplified planet population returns
 	float popStorage;
 
-	int beltRand; //Rand for belt creation
+	int numOfMoons, numOfBelts, numOfStations;
+
+	int beltRand,moonRand; //Rand for belt creation
 	vector<aBelt> belts; //A. Belts
 	vector<Moon> moons;
 	vector<Station> stations;
 	vector<Defense> pDef;
 	vector<Shield> pShd;
 
+	int i1;
 
 				  
 };

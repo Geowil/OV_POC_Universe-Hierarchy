@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include "planet.h"
 #include <Windows.h>
-#include <sstream>
 #include <cmath>
 #include "util.h"
 #include "consts.h"
+#include "settings.h"
 
-using std::stringstream;
+namespace u = Util;
+namespace setting = Settings;
 
 //global variable defines
 
@@ -34,60 +35,27 @@ This is a resource balancing feature but will be tweakable by players/modders in
 Planet::Planet() {}
 
 Planet::Planet(string name, float slvl) {
-
-	plName = name;
-	plSecLvl = slvl;
+	oName = name;
+	oSecLvl = slvl;
 	bIsDest = false;
 }
 
-Planet::Planet(string name, float eks, long long int pop, float slvl) {
-	
-	plName = name;
+Planet::Planet(string name, float eks, long long int pop, float slvl) {	
+	oName = name;
 	pEKS = eks;
 	pMPop = pop;
 	pPop = pMPop;
 	bIsDest = false;
-	plSecLvl = slvl;
+	oSecLvl = slvl;
 }
 
-Planet* Planet::getPlanet() {
-	return this;
-}
-
-float Planet::getEKS() {
-	return pEKS;
-}
-
-long long int Planet::getPop() {
-	return pPop;
-}
-
+Planet* Planet::getPlanet() { return this; }
+float Planet::getEKS() { return pEKS; }
+long long int Planet::getPop() { return pPop; }
 string Planet::getPopS() {
-	stringstream ss;
-	stringstream ss2;
-
-	ss << pPop;
-	sStorage = ss.str();
-
-	if ((sStorage.length() >= 4) && (sStorage.length() <= 6)) {
-		trailer = "K";
-		popStorage = pPop * 0.0001f;
-	} else if ((sStorage.length() >= 7) && (sStorage.length() <= 9)) {
-		trailer = "M";
-		popStorage = pPop * 0.000001f;
-	} else if ((sStorage.length() >= 10) && (sStorage.length() <= 12)) {
-		trailer = "B";
-		popStorage = pPop * 0.000000001f;
-	} else if ((sStorage.length() >= 13) && (sStorage.length() <= 16)) {
-		trailer = "T";
-		popStorage = pPop * 0.000000000001f;
-	} else {
-		popStorage = 0.0;
-		trailer = " ";
-	}
-
-	ss2 << popStorage;
-	sPPop = ss2.str();
+	sStorage = to_string(pPop);
+	getTrailer(sStorage);
+	sPPop = to_string(popStorage);
 
 	return sPPop + " " + trailer;
 }
@@ -97,72 +65,18 @@ long long int Planet::getMPop() {
 }
 
 string Planet::getMPopS() {
-	stringstream ss;
-	stringstream ss2;
-
-	ss << pMPop;
-	sStorage = ss.str();
-
-	if ((sStorage.length() >= 4) && (sStorage.length() <= 6)) {
-		trailer = "K";
-		popStorage = pMPop * 0.0001f;
-	} else if ((sStorage.length() >= 7) && (sStorage.length() <= 9)) {
-		trailer = "M";
-		popStorage = pMPop * 0.000001f;
-	} else if ((sStorage.length() >= 10) && (sStorage.length() <= 12)) {
-		trailer = "B";
-		popStorage = pMPop * 0.000000001f;
-	} else if ((sStorage.length() >= 13) && (sStorage.length() <= 16)) {
-		trailer = "T";
-		popStorage = pMPop * 0.000000000001f;
-	} else {
-		popStorage = 0.0;
-		trailer = " ";
-	}
-
-	ss2 << popStorage;
-	sPMPop = ss2.str();
+	sStorage = to_string(pMPop);
+	getTrailer(sStorage);
+	sPMPop = to_string(popStorage);
 
 	return sPMPop + " " + trailer;
 }
 
-string Planet::getName() {
-	return plName;
-}
-
-float Planet::getSize() {
-	return pSize;
-}
-
-
-bool Planet::bPIsDest() {
-	return bIsDest;
-}
-
-void Planet::setSize(float size) {
-	pSize = size;
-}
-
-void Planet::updatePop(long long int pop, string operation) {
-	if (operation == "set") {
-		pPop = pop;
-	} else if (operation == "add") {
-		pPop += pop;
-	} else if (operation == "sub") {
-		pPop -= pop;
-	}
-}
-
-void Planet::updateMPop(long long int pop, string operation) {
-	if (operation == "set") {
-		pMPop = pop;
-	} else if (operation == "add") {
-		pMPop += pop;
-	} else if (operation == "sub") {
-		pMPop -= pop;
-	}
-}
-
+float Planet::getSize() { return pSize; }
+bool Planet::bPIsDest() { return bIsDest; }
+void Planet::setSize(float size) { pSize = size; }
+void Planet::updatePop(long long int pop, string operation) { pPop = u::updateVal(operation, pop, pPop); }
+void Planet::updateMPop(long long int pop, string operation) { pMPop = u::updateVal(operation, pop, pMPop); }
 void Planet::setPDest(int i) {
 	if (i == 0) {
 		bIsDest = false;
@@ -171,14 +85,7 @@ void Planet::setPDest(int i) {
 	}
 }
 
-void Planet::setName(string name) {
-	plName = name;
-}
-
-void Planet::setEKS(float eks) {
-	pEKS = eks;
-}
-
+void Planet::setEKS(float eks) { pEKS = eks; }
 void Planet::setupPlanetObjects() {
 	createBelts();
 	createMoons();
@@ -186,13 +93,13 @@ void Planet::setupPlanetObjects() {
 }
 
 void Planet::createBelts() {
-	beltRand = Util::getIRand(0, 10);
+	numOfBelts = u::getIRand(1, setting::maxAsteroidBelts);
 
-	if (beltRand != 0) {
-		for (i = 1; i <= beltRand; i++) {
-			ramount = Util::getIRand(3, 15); //External value tag: int range
-			size = ((ramount * Util::getFRand(1000.0f, 50000.00f) * 46) / 2); //External value tag: float range
-			name = plName + " Asteroid Belt " + rNumerals[i - 1];
+	if (numOfBelts != 0) {
+		for (i = 1; i <= numOfBelts; i++) {
+			ramount = u::getIRand(setting::abltMaxAsteroids.iLow, setting::abltMaxAsteroids.iHigh);
+			size = ((ramount * u::getFRand(setting::abltSizeRandRng.fLow, setting::abltSizeRandRng.fHigh) * 46) / 2);
+			name = oName + " Asteroid Belt " + rNumerals[i - 1];
 
 			addBelt(name, size, ramount, false);
 		}
@@ -203,7 +110,7 @@ void Planet::addBelt(string name, float size, int ramount, bool full) {
 	if (!full) {
 		belts.push_back(aBelt(name, size, ramount, false));
 
-		belts.at(belts.size() - 1).createAsteroids(plSecLvl);
+		belts.at(belts.size() - 1).createAsteroids(oSecLvl);
 
 		//Sleep(300);
 	} else {
@@ -214,7 +121,7 @@ void Planet::addBelt(string name, float size, int ramount, bool full) {
 void Planet::modifyABelt(aBelt ab) {
 	for (int i1 = 0; i1 < belts.size(); i1++) {
 		if (i1 == belts.size() - 1 && belts[i1].getName() != ab.getName()) {
-			Util::createBInfo("Err", __FILE__, to_string(__LINE__), __DATE__, __TIME__, "Err010", "Asteroid belt " + ab.getName() + " not found in expected system.", "./OV_Log.txt");
+			u::createBInfo("Err", __FILE__, to_string(__LINE__), __DATE__, __TIME__, "Err010", "Asteroid belt " + ab.getName() + " not found in expected system.", "./OV_Log.txt");
 		}
 		else if (belts[i1].getName() == ab.getName()) {
 			belts[i1] = ab;
@@ -232,20 +139,41 @@ aBelt Planet::getABelt(int index) {
 }
 
 void Planet::createMoons() {
-	beltRand = Util::getIRand(0, 3);
+	moonRand = u::getIRand(setting::mnAmtRnd.iLow, setting::mnAmtRnd.iHigh);
 
-	if (beltRand != 0) {
-		for (i = 1; i <= beltRand; i++) {
+	for (setting::pltTypeSettings plt : setting::gPltTypSettings){
+		if (pEKS >= plt.getPltEksRng().fLow && pEKS <= plt.getPltEksRng().fHigh) {
+			for (i1 = 0; i1 < plt.getPltMnAmtSz() - 1; i1++) {
+				if (i1 == 0 && (moonRand >= 1 && moonRand <= plt.getPltMnAmt(i1))) {
+					numOfMoons = i1;
+				}
+				else if (i1 != 0 && (moonRand >= plt.getPltMnAmt(i1 - 1) && moonRand <= plt.getPltMnAmt(i1))) {
+					numOfMoons = i1;
+				}
+			}
+		}
+	}
+
+	if (numOfMoons != 0) {
+		for (i = 1; i <= numOfMoons; i++) {
 			
-			name = plName + " Moon " + rNumerals[i - 1];
+			name = oName + " Moon " + rNumerals[i - 1];
 
 			addMoon(name);
 		}
 	}
+
+
 }
 
 void Planet::addMoon(string name) {
 	moons.push_back(Moon(name));
+}
+
+void Planet::setupMoonData() {
+	for (Moon& mn : moons) {
+		mn.setupMoon(pEKS,oSecLvl);
+	}
 }
 
 void Planet::modifyMoon(Moon m) {
@@ -274,7 +202,7 @@ void Planet::createStations() {
 	if (beltRand != 0) {
 		for (i = 1; i <= beltRand; i++) {
 
-			name = plName + " Station " + rNumerals[i - 1];
+			name = oName + " Station " + rNumerals[i - 1];
 
 			addStation(name);
 		}
@@ -353,5 +281,25 @@ Shield Planet::getShield(int index) {
 	return pShd.at(index);
 }
 
-void Planet::setSLevel(float slvl) { plSecLvl = slvl; }
-float Planet::getSLevel() { return plSecLvl; }
+void Planet::getTrailer(string pop) {
+	if ((sStorage.length() >= 4) && (sStorage.length() <= 6)) {
+		trailer = "K";
+		popStorage = pMPop * 0.0001f;
+	}
+	else if ((sStorage.length() >= 7) && (sStorage.length() <= 9)) {
+		trailer = "M";
+		popStorage = pMPop * 0.000001f;
+	}
+	else if ((sStorage.length() >= 10) && (sStorage.length() <= 12)) {
+		trailer = "B";
+		popStorage = pMPop * 0.000000001f;
+	}
+	else if ((sStorage.length() >= 13) && (sStorage.length() <= 16)) {
+		trailer = "T";
+		popStorage = pMPop * 0.000000000001f;
+	}
+	else {
+		popStorage = 0.0;
+		trailer = " ";
+	}
+}

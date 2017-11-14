@@ -6,6 +6,7 @@ Err001 - sqlite3_step() could not be executed
 Err002 - sqlite3_prepare_v2() could not prepare supplied sql stmt
 Err003 - Database or Save file not found
 Err004 - Supplied setting does not have two values
+Err010 - Asteroid Belt not present in roids vector
 
 
 Warning Codes:

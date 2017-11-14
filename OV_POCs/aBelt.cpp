@@ -47,9 +47,9 @@ void aBelt::createAsteroids(float secLvl) {
 	ds_ab.openDB();
 
 	while (!bIsABFull) {
-		oreTier = u::getFRand(1.0, 100.0);
+		oreTier = u::getFRand(setting::oreTrRnd.fLow, setting::oreTrRnd.fHigh);
 		roidSizeCat = u::getFRand(setting::roidSizeRandRng.fLow, setting::roidSizeRandRng.fHigh);
-		oreStage = u::getIRand(1, 100);
+		oreStage = u::getIRand(setting::oreStgRnd.iLow, setting::oreStgRnd.iHigh);
 
 		//First figure out the sec rating of system
 		if (secLvl > setting::secRtHighRng.fLow) {
